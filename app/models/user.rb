@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
 
   private
 
+  #generates a secure random key of 40 characters. Checks if
+  #random key already exists
   def private_generate_token
     begin
       self.access_id = SecureRandom.base64(40)
