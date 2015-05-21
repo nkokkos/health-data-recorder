@@ -1,0 +1,2 @@
+module ListOfDevicesControllerHelper
+end

@@ -1,0 +1,26 @@
+I"(function() {
+  $(function() {
+    return Morris.Line({
+      element: 'device-area-chart',
+      data: $('#device-area-chart').data('chartdata'),
+      xkey: 'created_at',
+      ykeys: ['data'],
+      labels: ['data'],
+      pointSize: 4,
+      hideHover: 'auto',
+      resize: true,
+      pointFillColors: ['#ffffff'],
+      pointStrokeColors: ['green']
+    });
+  });
+
+  $(function() {
+    $('#device-raw-data').dataTable();
+    return {
+      "scrollX": false,
+      "scrollY": false
+    };
+  });
+
+}).call(this);
+:ET

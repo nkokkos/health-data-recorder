@@ -1,0 +1,7 @@
+for i in 1..100
+  puts "Data + #{i}"
+  measurement_block = MeasurementBlock.create(:user_id => 2)
+  Measurement.create(:measure_value => Random.new.rand(40..130),
+				     :measurement_block_id => measurement_block.id,
+				     :created_at => Time.at(60.days.ago + rand * (Time.now.to_f - 60.days.ago.to_f)))
+end

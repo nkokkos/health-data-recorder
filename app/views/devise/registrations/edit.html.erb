@@ -1,0 +1,145 @@
+<body>
+<div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to "El Tab Project", root_path, {:class => "navbar-brand"} %>
+            </div>
+            <!-- /.navbar-header -->
+            <%= render 'layouts/header_with_menu' %>
+            <!-- /.navbar-top-links -->
+            <%= render 'layouts/sidebar_menu' %>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                     <h3 class="page-header">Demographic/Personal Info:</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- <div class="row"> -->
+			  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+			  <%#= f.error_notification %>
+			  <%#= alert %>
+			  <%= devise_error_messages! %>
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                          User Data:
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+								<h3>1. Basic Information:</h3>
+                                        <div class="form-group">
+                                          <%= f.input :email, required: true, autofocus: true, :input_html => {:class => "form-control" } %>
+                                        </div>
+                                        <div class="form-group">
+                                          <%= f.input :username, required: true, :input_html => {:class => "form-control" } %>
+                                        </div>
+										<div class="form-group">
+                                          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+										    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+										  <% end %>
+										</div>
+									    <div class="form-group">
+                                          <%= f.input :sex_id,:collection => Sex.all, :label_method => :description, :value_method => :id, :label => "Select your Sex:", :include_blank => true, :input_html => {:class => "form-control",  :placeholder => "Enter your sex"} %>
+                                        </div>
+										<div class="form-group">
+									      <%= f.input :birth_date, label: "Your birthday:", as: :date, start_year: Date.today.year - 80, end_year: Date.today.year - 12, order: [:day, :month, :year], :input_html => {:class => "user_birth_date"},
+										  :inline_label => true %>
+									   </div>
+									   <div class="form-group">
+									     <%= f.input :height, label: "Height in cm:", required: false,:input_html => {:class => "form-control", :placeholder => "Your height in cm" } %>
+									   </div>
+										<div class="form-group">
+                                          <%= f.input :rfid_tag, required: false,:input_html => {:class => "form-control", :placeholder => "The RFID you have been assigned to" } %>
+                                        </div>
+										<div class="form-group">
+                                            <%= f.input :additional_info, required: false,:input_html => {:class => "form-control",
+											  :placeholder => "Add here additional information", :rows => 5 },:label => "Additonal Information:" %>
+											<!-- <textarea class="form-control" rows="3"></textarea> -->
+                                        </div>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <div class="col-lg-6">
+                                    <h3>2. Habits:</h3>
+                                    <div class="form-group">
+									     <div class="checkbox">
+							               <%= f.input :exercises, label: "Do you exercise?", :inline_label => true %>
+                                         </div>
+										 <%= f.input :exercise_activity_id,:collection => ExerciseActivity.all,
+										   :label_method => :description, :value_method => :id,
+									       :label => "Exercise Activity", :include_blank => true, id: "exercise_activity_id",
+										   :input_html => {:class => "form-control"} %>
+                                       </div>
+									   <div class="form-group">
+									      <div class="checkbox">
+									       <%= f.input :is_smoker, label: "Do you smoke?", :inline_label => true %>
+										 </div>
+                                         <%= f.input :smoking_frequency_id,:collection => SmokingFrequency.all,
+									      :label_method => :description, :value_method => :id,
+										  :label => "Smoking Frequency", :include_blank => true, id: "smoking_frequency_id",
+										  :input_html => {:class => "form-control"} %>
+                                       </div>
+                                </div>
+
+								 <div class="col-lg-6">
+                                   <h3>3. Education:</h4>
+								   <div class="form-group">
+								     <%= f.input :education_level_id,:collection => EducationLevel.all, :label_method => :description, :value_method => :id, :label => "Educaton Level", :include_blank => true, :input_html => {:class => "form-control"} %>
+								   </div>
+								</div>
+								<div class="col-lg-6">
+								<h3>4. Chronic Diseases (Alphabetically):</h3>
+								<div class="form-group">
+								  <% for chronic_disease in ChronicDisease.all.order('description ASC') %>
+								    <div class="checkbox">
+									<label>
+								      <%= check_box_tag "user[chronic_disease_ids][]",
+								      chronic_disease.id, @user.chronic_diseases.include?(chronic_disease) %>
+								      <%#= chronic_disease.id %>
+									  <%= chronic_disease.description %>
+									  </label>
+									</div>
+								  <% end %>
+								</div>
+								<div class="col-lg-6">
+								  <!--
+								      <h3>Password:</h4>
+								      <div class="form-group">
+								        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+								         <%= f.password_field :current_password, autocomplete: "off" %>
+								      </div>
+								  </div>
+								  -->
+								 <div class="form-actions">
+								    <%= f.button :submit, "Update",  class: "btn btn-success"  %>
+									<%#= link_to  "Cancel", :back,   class: "btn btn-default"  %>
+									<%= link_to  "Cancel", root_path,class: "btn btn-default"  %>
+								 </div>
+								<% end %>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+  </div>
+ </div>	
+</body>

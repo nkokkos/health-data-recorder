@@ -1,0 +1,82 @@
+<body>
+  <div id="area-example"></div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<%= link_to "El Tab Project", root_path, {:class => "navbar-brand"} %>
+            </div>
+            <!-- /.navbar-header -->
+           <%= render 'layouts/header_with_menu' %>
+           <%= render 'layouts/sidebar_menu' %>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">Metrics(Latest Recordings):</h3> 
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+            
+              <% Device.all.each do |device| %>
+              <% device.measures.each do |measure| %>
+                           
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-info-circle fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-center">
+                                    <% @latest_value = @user.measurements.where(:device_id => device.id).where(:measure_id => measure.id).order(:created_at => "desc").limit(1).first %>
+                                    <% if @latest_value.nil? %>
+                                     <% @latest_user_value = 0 %>
+                                    <% else %>
+                                     <% @latest_user_value = @latest_value.measure_value %>
+                                    <% end %> 
+                                    <div class="huge"><%=number_with_precision(@latest_user_value, precision: 2) %></div>
+                                </div>
+                            </div>
+                        </div>
+						<a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left"><%=device.name%>:<%=measure.name%></span>
+                              <!--  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> -->
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+              <% end %>
+              <% end %>
+				
+				
+				
+				
+				
+            </div>
+            <!-- /.row -->
+                        <!-- /.panel-heading -->
+														
+                     <!-- /.panel-body -->
+                    </div>
+
+                    <!-- /.panel -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+	<%#= debug @user %>
+</body>

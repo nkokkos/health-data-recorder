@@ -1,0 +1,28 @@
+<ul class="nav navbar-top-links navbar-right">
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-user">
+	<% if user_signed_in? %>
+    <li>
+	  <%= link_to (content_tag(:i,nil,:class => "fa fa-user fa-fw") + " Edit User Profile").html_safe,
+	    edit_user_registration_path %>
+	</li>
+	<% end %>
+    <li>
+	  <%= link_to (content_tag(:i,nil,:class => "fa fa-user fa-fw") + " Settings").html_safe,
+	    users_settings_path %>
+	</li>
+	<li class="divider"></li>
+	<% if user_signed_in? %>
+      <li>
+	    <%= link_to (content_tag(:i,nil,:class => "fa fa-sign-out fa-fw") + " Logout").html_safe,
+	    destroy_user_session_path, :method => :delete %>
+	  </li>
+	<% end %>
+    </ul>
+    <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
+</ul>
