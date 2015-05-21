@@ -51,8 +51,8 @@
 										  <% end %>
 										</div>
 									    <div class="form-group">
-                                          <%= f.input :sex_id,:collection => Sex.all, :label_method => :description, :value_method => :id, :label => "Select your Sex:", :include_blank => true, :input_html => {:class => "form-control",  :placeholder => "Enter your sex"} %>
-                                        </div>
+                        <%= f.input :sex_id,:collection => Sex.all, :label_method => :description, :value_method => :id, :label => "Select your Sex:", :include_blank => true, :input_html => {:class => "form-control",  :placeholder => "Enter your sex"} %>
+                      </div>
 										<div class="form-group">
 									      <%= f.input :birth_date, label: "Your birthday:", as: :date, start_year: Date.today.year - 80, end_year: Date.today.year - 12, order: [:day, :month, :year], :input_html => {:class => "user_birth_date"},
 										  :inline_label => true %>
@@ -61,14 +61,14 @@
 									     <%= f.input :height, label: "Height in cm:", required: false,:input_html => {:class => "form-control", :placeholder => "Your height in cm" } %>
 									   </div>
 										<div class="form-group">
-                                          <%= f.input :rfid_tag, required: false,:input_html => {:class => "form-control", :placeholder => "The RFID you have been assigned to" } %>
-                                        </div>
+                      <%= f.input :rfid_tag, required: false,:input_html => {:class => "form-control", :placeholder => "The RFID you have been assigned to" } %>
+                    </div>
 										<div class="form-group">
-                                            <%= f.input :additional_info, required: false,:input_html => {:class => "form-control",
-											  :placeholder => "Add here additional information", :rows => 5 },:label => "Additonal Information:" %>
+                      <%= f.input :additional_info, required: false,:input_html => {:class => "form-control",
+											  :placeholder => "Add here additional health information", :rows => 5 },:label => "Additonal Health Information:" %>
 											<!-- <textarea class="form-control" rows="3"></textarea> -->
-                                        </div>
-                                </div>
+                    </div>
+                    </div>
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
                                     <h3>2. Habits:</h3>
@@ -141,5 +141,5 @@
         <!-- /#page-wrapper -->
     </div>
   </div>
- </div>	
+ </div>
 </body>
