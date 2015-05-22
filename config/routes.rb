@@ -38,7 +38,8 @@ Rails.application.routes.draw do
     get  '/devices', to: 'devices#index',  defaults: { format: 'json' }
 	  get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
 	  get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
-	  post '/measurement_blocks/create', to: 'measurement_blocks#create',  defaults: { format: 'json' }
+	  get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
+          post '/measurement_blocks/create', to: 'measurement_blocks#create',  defaults: { format: 'json' }
   	post '/measurements/create', to: 'measurements#create',  defaults: { format: 'json' }
   end
 
