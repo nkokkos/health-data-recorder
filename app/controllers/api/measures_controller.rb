@@ -1,4 +1,4 @@
-class Api:MeasuresController < Api::BaseController
+class Api::MeasuresController < Api::BaseController
   # responds to json or html requests
   # through inheritance from BaseController:
   def index
