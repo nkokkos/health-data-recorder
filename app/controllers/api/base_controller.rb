@@ -9,7 +9,7 @@ class Api::BaseController < ActionController::Base
 
     def authenticate_user_with_access_key!
 
-        puts "request.content_type: " + request.content_type
+          #puts "request.content_type: " + request.content_type
 
           if request.get? || request.post? &&
              request.headers["Authorization"] &&

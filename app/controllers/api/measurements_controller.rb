@@ -8,10 +8,18 @@ class Api::MeasurementsController < Api::BaseController
     if current_user_from_api_access
       respond_to do |format|
         format.json { render json:  current_user_from_api_access.measurements.all.to_json }
-	      format.html { render text:  current_user_from_api_access.measurements.all.to_json  }
+	format.html { render text:  current_user_from_api_access.measurements.all.to_json  }
       end
-	end
+    else
+      respond_to do |format|
+        format.json { render json: { "result" => "Fail", "message" =>  "Invalid user"  }.to_json }
+      end
+    end  
   end
+
+
+
+
 
   def create
     if current_user_from_api_access
