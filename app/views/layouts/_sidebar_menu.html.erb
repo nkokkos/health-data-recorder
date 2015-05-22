@@ -4,9 +4,9 @@
       <li>
 		    <%= link_to (content_tag(:i,nil,:class => "fa fa-dashboard fa-fw") + " DashBoard").html_safe,
 	      root_path %>
-	  </li>
+	   </li>
 	  <li>
-		<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+		<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>My Charts<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		  <% Device.all.each do |dev| %>
         <% dev.measures.each do |measure| %>
@@ -19,8 +19,12 @@
 		</ul>
 		<!-- /.nav-second-level -->
 		</li>
+    <li>
+      <%= link_to (content_tag(:i,nil,:class => "fa fa-user") + " My Patients").html_safe,
+        patients_path %>
+   </li>
 		<li>
-	    <a href="#"><i class="fa fa-info"></i> Events<span class="fa arrow"></span></a>
+	   <a href="#"><i class="fa fa-info"></i> Events<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		  <li>
 		  <a href="#">Measurement Updates</a>

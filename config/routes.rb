@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   resources :patient_relationships
 
+  get '/patients', to: 'patients#index'
+  get '/patients/:id', to: 'patients#show', as: 'patient'
+
+
   # don't use :measurements are resource yet
   #namespace :api do
   #  resources :measurements

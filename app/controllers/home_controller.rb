@@ -5,7 +5,10 @@ class HomeController < ApplicationController
     @user = User.find(current_user.id)
     @devices = Device.all
 
- 
+    
+    # <% @data = @user.measurements.where(:device_id => dev.id, :measure_id => measure.id).order(:created_at => "desc").pluck(:created_at, :measure_value).first
+
+
     # kilograms related to Tanita scale measurements. Tanita scale has
     # an id = 1 in devices table, Tanita_Scale_id is configured in
     # config/application.yml
