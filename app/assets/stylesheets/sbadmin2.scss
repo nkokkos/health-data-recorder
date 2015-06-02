@@ -363,7 +363,8 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 
-.footer_page {
+#footer_page {
+  margin: 0 auto;
   position: relative;
   align:center;
   bottom: 0;
