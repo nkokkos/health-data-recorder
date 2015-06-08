@@ -23,8 +23,11 @@ Rails.application.routes.draw do
 
   resources :patient_relationships
 
-  get '/patients', to: 'patients#index'
-  get '/patients/:id', to: 'patients#show', as: 'patient'
+  get '/patients/add_remove', to: 'patients#add_remove'
+  get '/patients',            to: 'patients#index'
+  get '/patients/:id',        to: 'patients#show', as: 'patient'
+
+
 
 
   # don't use :measurements are resource yet
@@ -39,7 +42,7 @@ Rails.application.routes.draw do
 	  get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
 	  get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
 	  get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
-          post '/measurement_blocks/create', to: 'measurement_blocks#create',  defaults: { format: 'json' }
+    post '/measurement_blocks/create', to: 'measurement_blocks#create',  defaults: { format: 'json' }
   	post '/measurements/create', to: 'measurements#create',  defaults: { format: 'json' }
   end
 

@@ -7,16 +7,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def age_calculation(birthday)
-    now = Time.now.utc.to_date
-    now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
-  end
-
-  def bmi_percent_fat_calculation(weight, height, age, sex)
-    height_in_meters = height / 100.0
-    weight / (height_in_meters * height_in_meters)
-  end
-
 
   def update_sanitized_params
 

@@ -10,4 +10,7 @@ class PatientsController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def add_remove
+  end
+
 end

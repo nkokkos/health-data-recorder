@@ -1,5 +1,13 @@
 class PatientRelationshipsController < ApplicationController
 
+  def index
+    @patients = current_user.patients
+  end
+
+  def show
+  #
+  end
+
   def create
     @patient = current_user.patient_relationships.build(:patient_id => params[:patient_id])
     if @patient.save
@@ -19,6 +27,9 @@ class PatientRelationshipsController < ApplicationController
     flash[:notice] = "Removed patient."
     #redirect_to users_settings_url
     redirect_to users_settings_path
+  end
+
+  def add_remove
   end
 
 end

@@ -14,14 +14,15 @@
   <%= csrf_meta_tags %>
 </head>
 <!--  <body> -->
+<body>
+<div id="wrapper">
   <%= flash_messages %>
   <%= yield %>
 <!-- </body> -->
 <%#= debug @user %>
-<div id="footer_page">
-  <p>SchemaVersion:<%= ActiveRecord::Migrator.current_version %></p>
 </div>
-<div id="footer_page"
-  <p>AppVersion: 0.1.1</p>
+</body>
+<div id="footer_page">
+  SchemaVersion:<%= ActiveRecord::Migrator.current_version %>, WebAppVersion: 0.1.1
 </div>
 </html>

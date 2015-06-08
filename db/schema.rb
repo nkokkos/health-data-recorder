@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515124423) do
+ActiveRecord::Schema.define(version: 20150605082354) do
 
   create_table "chronic_diseases", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -92,6 +92,17 @@ ActiveRecord::Schema.define(version: 20150515124423) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.boolean  "allow_doctor_tracking", limit: 1
+    t.integer  "device_id",             limit: 4
+    t.integer  "measure_id",            limit: 4
+    t.integer  "user_id",               limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "settings", ["user_id"], name: "index_settings_on_user_id", using: :btree
+
   create_table "sexes", force: :cascade do |t|
     t.string   "description", limit: 255
     t.datetime "created_at"
@@ -139,6 +150,13 @@ ActiveRecord::Schema.define(version: 20150515124423) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "versions", force: :cascade do |t|
+    t.string   "version",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   add_foreign_key "measurement_blocks", "users"
   add_foreign_key "measurements", "measurement_blocks"
+  add_foreign_key "settings", "users"
 end

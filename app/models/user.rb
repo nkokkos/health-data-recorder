@@ -12,14 +12,27 @@ class User < ActiveRecord::Base
   has_many :patient_relationships
   has_many :patients, :through => :patient_relationships
 
+  has_one :setting
+
   validates :height, :allow_nil => false, numericality: { only_integer: true }
 
-  before_create :generate_access_token
+  before_create :generate_access_token, :set_birth_date
 
   def generate_access_token
     #call private nethod below
     private_generate_token
   end
+
+  def set_birth_date
+    self.birth_date = Time.now
+  end
+
+  def self.age_calculation(birthday)
+    now = Time.now.utc.to_date
+    now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
+
+
 
   # used by rails_admin to display look up values correctly in /admin:
   # starts here:
