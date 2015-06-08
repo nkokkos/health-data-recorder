@@ -11,13 +11,12 @@ class HomeController < ApplicationController
     @sex = Sex.where(:id => @user.sex_id).first
     @current_age = User.age_calculation(@user.birth_date)
 
-    #grab device that measures weight:
-    measure_id = Measure.all.includes(:device).where(name: "WeightValue").first.id
+    #grab setting from user that measures weight
+    measure_row   = Measure.where(:id => user.setting.measure_id).first
     #grab device's name that measures weight
-    @device_name = Device.find(Measure.all.includes(:device).where(name: "WeightValue").first.device_id).name
-
+    @device_name = Device.find(Measure.all.includes(:device).where(name: measure_row.name).first.device_id).name
     #grab the latest created value for this user's weight:
-    last_weight_measurement = @user.measurements.where(:measure_id =>measure_id).order(:created_at => "desc").first
+    last_weight_measurement = @user.measurements.where(:measure_id =>measure_row.id).order(:created_at => "desc").first
 
     if last_weight_measurement.nil?
       @last_weight_measurement = 0

@@ -13,11 +13,11 @@ class PatientRelationshipsController < ApplicationController
     if @patient.save
       flash[:notice] = "Added patient."
       #redirect_to root_url
-      redirect_to users_settings_path
+      redirect_to patient_add_remove_path
     else
       flash[:notice] = "Unable to add patient."
       #redirect_to root_url
-      redirect_to users_settings_path
+      redirect_to patient_add_remove_path
     end
   end
 
@@ -26,7 +26,7 @@ class PatientRelationshipsController < ApplicationController
     @patient.destroy
     flash[:notice] = "Removed patient."
     #redirect_to users_settings_url
-    redirect_to users_settings_path
+    redirect_to patient_add_remove_path
   end
 
   def add_remove

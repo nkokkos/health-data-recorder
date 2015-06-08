@@ -16,7 +16,7 @@ class RegistrationsController < Devise::RegistrationsController
   def index
     @user = User.find(current_user.id)
   end
- 
+
   def edit
     @user = User.find(current_user.id)
   end
@@ -33,6 +33,26 @@ class RegistrationsController < Devise::RegistrationsController
 
   def settings
     @user = User.find(current_user.id)
+    @setting = @user.setting
+    if @setting.nil?
+      setting = Setting.new
+      setting.save
+      @user.setting = setting
+    end
+  end
+
+  def settings_save
+    @user = User.find(current_user.id)
+    @setting = @user.setting
+    @setting.update(settings_params)
+    redirect_to patients_path
+    #@setting = @user.setting.update(:patient_id => params[:patient_id])
+    #@setting = @user.setting
+  end
+
+
+  def settings_params
+    params.require(:setting).permit(:allow_doctor_tracking, :device_id, :measure_id)
   end
 
   def update

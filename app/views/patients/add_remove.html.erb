@@ -1,0 +1,98 @@
+<%= render 'layouts/sidebar_menu' %>
+        <div id="page-wrapper">
+          <div class="row">
+            <div class="col-lg-12">
+             <h3 class="page-header">Patients:</h3>
+            </div>
+            <!-- /.col-lg-12 -->
+          </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Patients:
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                          <%#= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#profile" data-toggle="tab">Add Patients</a>
+                                </li>
+                                <li><a href="#messages" data-toggle="tab">Remove Patients</a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane fade in active" id="profile">
+                                  <h4>Candidate Patients:</h4>
+                                  <div class="form-group">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th>Device Id</th> -->
+                                                    <th>User Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              <% for user in User.all %>
+                                              <tr>
+                                                <% if user.id == current_user.id %>
+                                                  <td><strong><%= user.username %></strong> (This is you)</td>
+                                                  <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
+                                                     :class=>"btn btn-primary btn-sm", :method => :post %></td>
+                                                <% elsif @user.username.size == 0 %>
+                                                  <td><p><strong>This patient has not entered his/name in settings</strong></td>
+                                                  <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
+                                                     :class=>"btn btn-primary btn-sm", :method => :post  %></td>
+                                                <% else %>
+                                                       <td><p><strong><%= user.username %></strong></td>
+                                                       <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
+                                                          :class=>"btn btn-primary btn-sm", :method => :post  %></td>
+
+                                              </tr>
+                                              <% end %>
+                                              <% end %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="tab-pane fade" id="messages">
+                                  <h4>Your Patients:</h4>
+                                  <div class="form-group">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th>Device Id</th> -->
+                                                    <th>User Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                    <% for patient_relation in @user.patient_relationships %>
+                                      <tr>
+                                        <td><%= patient_relation.patient.username %><td>
+                                        <td><%= link_to "Remove", patient_relation,  :class=>"btn btn-primary btn-sm", :method => :delete %></td>
+                                    </tr>
+                                    <% end %>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                    </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+   </div>
+  </div>
+</div>
+            <!-- /.row -->

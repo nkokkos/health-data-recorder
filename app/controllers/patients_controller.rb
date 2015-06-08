@@ -11,6 +11,7 @@ class PatientsController < ApplicationController
   end
 
   def add_remove
+    @user = User.find(current_user.id)
   end
 
 end

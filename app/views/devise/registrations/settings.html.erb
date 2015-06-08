@@ -19,10 +19,6 @@
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#home" data-toggle="tab">Access Key Generation</a>
                                 </li>
-                                <li><a href="#profile" data-toggle="tab">Add Patients</a>
-                                </li>
-                                <li><a href="#messages" data-toggle="tab">Remove Patients</a>
-                                </li>
                                 <li><a href="#bmi" data-toggle="tab">BMI Calculation</a>
                                 </li>
                             </ul>
@@ -40,76 +36,52 @@
                                       <%= link_to  "Generate new access key", users_token_path, class: "btn btn-default",
                                                                                         title: 'Click Update below after key generation', rel: 'tooltip'  %>
                                       </div>
+
+                                      <div class="form-actions">
+                                        <%= f.button :submit, "Update", class: "btn btn-success"%>
+                                        <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
+                                     </div>
+                                     <% end %>
+
                                 </div>
 
-                                <div class="tab-pane fade" id="profile">
-                                  <h4>Candidate Patients:</h4>
-                                  <div class="form-group">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <!-- <th>Device Id</th> -->
-                                                    <th>User Name</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                              <% for user in User.all %>
-                                              <tr>
-                                                <% if user.id == current_user.id %>
-                                                  <td><strong><%= user.username %></strong> (This is you)</td>
-                                                  <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
-                                                     :class=>"btn btn-primary btn-sm", :method => :post %></td>
-                                                <% elsif @user.username.size == 0 %>
-                                                  <td><p><strong>This patient has not entered his/name in settings</strong></td>
-                                                  <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
-                                                     :class=>"btn btn-primary btn-sm", :method => :post  %></td>
-                                                <% else %>
-                                                       <td><p><strong><%= user.username %></strong></td>
-                                                       <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
-                                                          :class=>"btn btn-primary btn-sm", :method => :post  %></td>
-
-                                              </tr>
-                                              <% end %>
-                                              <% end %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="tab-pane fade" id="messages">
-                                  <h4>Your Patients:</h4>
-                                  <div class="form-group">
-                                    <ul>
-                                    <% for patient_relation in @user.patient_relationships %>
-                                      <li>
-                                      <%= patient_relation.patient.username %>
-                                      (<%= link_to "Remove", patient_relation, :method => :delete %>)
-                                      </li>
-                                    <% end %>
-                                   </ul>
-                                 </div>
-                                </div>
 
 
                                 <div class="tab-pane fade in active" id="bmi">
                                   <h4>Select which device should be used for bmi/fat% calculation:</h4>
+                                  <%= simple_form_for @setting,
+                                  :url => url_for(:action => 'settings_save', :controller => 'registrations'),
+                                  :method => 'post' do |f| %>
+                                  <div class="form-group">
 
+                                    <div class="checkbox">
+                                      <%= f.input :allow_doctor_tracking, label: "Allow doctor to track you?", :inline_label => true %>
+                                    </div>
+
+                                    <%= f.input :device_id,:collection => Device.all,
+                                      :label_method => :name, :value_method => :id,
+                                        :label => "Devices", :include_blank => true, id: "device_id",
+                                      :input_html => {:class => "form-control"} %>
+
+                                      <%= f.input :measure_id,:collection => Measure.all,
+                                        :label_method => :name, :value_method => :id,
+                                          :label => "Measures", :include_blank => true, id: "measure_id",
+                                        :input_html => {:class => "form-control"} %>
+                                      </div>
+
+
+                                      <div class="form-actions">
+                                        <%= f.button :submit, "Update", class: "btn btn-success"%>
+                                        <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
+                                     </div>
+
+                                     <% end %>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    <div class="form-actions">
-                      <%= f.button :submit, "Update", class: "btn btn-success"%>
-                      <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
-                   </div>
-                   <% end %>
+
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-6 -->

@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
   #http://stackoverflow.com/questions/20599714/rails-add-new-view-to-devise
   devise_scope :user do
-    get "/users/settings"  => "registrations#settings"
-	  get "/users/token"     => "registrations#token"
-	  get "/users/notsignup" => "registrations#nosignup"
+    get  "/users/settings"       => "registrations#settings"
+    post "/users/settings_save"  => "registrations#settings_save"
+	  get  "/users/token"     => "registrations#token"
+	  get  "/users/notsignup" => "registrations#nosignup"
   end
 
   get 'home/index'
@@ -21,14 +22,17 @@ Rails.application.routes.draw do
     resources :measures, only: [:index, :show]
   end
 
-  resources :patient_relationships
 
-  get '/patients/add_remove', to: 'patients#add_remove'
+  #really need to put '/patients/add_remove' get method before show,
+  #otherwise it does not work
+  #see this stackoverflow question/answer:
+  #http://stackoverflow.com/questions/25298949/rails-in-controller-a-new-view-is-always-rendered-by-show
+  get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
+
   get '/patients',            to: 'patients#index'
   get '/patients/:id',        to: 'patients#show', as: 'patient'
 
-
-
+  resources :patient_relationships
 
   # don't use :measurements are resource yet
   #namespace :api do
