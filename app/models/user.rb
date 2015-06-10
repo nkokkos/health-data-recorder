@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validates :height, :allow_nil => false, numericality: { only_integer: true }
 
   before_create :generate_access_token, :set_birth_date
+  after_create  :update_setting_table
 
   def generate_access_token
     #call private nethod below
@@ -71,5 +72,18 @@ class User < ActiveRecord::Base
     end while self.class.exists?(access_id: access_id)
   end
 
+  def update_setting_table
+    begin
+      user = User.find(self.id)
+      setting = user.setting
+      if setting.nil?
+        setting = Setting.new
+        setting.save
+        user.setting = setting
+     end
+    rescue StandardError => e
+      logger.debug "update_setting_table exception: #{e.message}"
+    end
+  end
 
 end

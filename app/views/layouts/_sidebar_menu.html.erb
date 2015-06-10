@@ -8,16 +8,14 @@
             <span class="icon-bar"></span>
         </button>
         <%=image_tag("logo.png",{:class => "navbar-brand"}) %>
-        <%= link_to "ELTab Project", root_path, {:class => "navbar-brand"} %>
+        <%=link_to "ELTab Project", root_path, {:class => "navbar-brand"} %>
     </div>
 <ul class="nav navbar-top-links navbar-right">
-
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
     </a>
     <ul class="dropdown-menu">
-
   <% if user_signed_in? %>
     <li>
       <%= link_to (content_tag(:i,nil,:class => "fa fa-user fa-fw") + " Edit User Profile").html_safe,
@@ -46,6 +44,7 @@
       <li>
 		    <%= link_to (content_tag(:i,nil,:class => "fa fa-dashboard fa-fw") + " DashBoard").html_safe,
 	      root_path %>
+        <%#= link_to "DashBoard", root_path %>
 	   </li>
 	  <li>
 		<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>My Charts<span class="fa arrow"></span></a>
@@ -53,8 +52,8 @@
 		  <% Device.all.each do |dev| %>
         <% dev.measures.each do |measure| %>
           <li>
-          <i class="deviceclass"></i> <b>Device:<%=format_device(dev.name)%></b>
-          <%=link_to measure.name, device_measure_path(dev.id, measure.id) %>
+            <i class="deviceclass"></i><b>Device:<%=format_device(dev.name)%></b>
+              <%=link_to measure.name, device_measure_path(dev.id, measure.id) %>
           </li>
         <% end %>
       <% end %>
@@ -64,16 +63,15 @@
     <li>
       <a href="#"><i class="fa fa-user"></i> Patients<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-          <li class="active">
-            <%= link_to (content_tag(:i,nil,:class => "fa fa-user") + " My Patients").html_safe,
+          <li>
+            <%=link_to (content_tag(:i,nil,:class => "fa fa-user") + " My Patients").html_safe,
             patients_path %>
           </li>
-          <li>
-            <%=
-            link_to (content_tag(:i,nil,:class => "fa fa-user") + " Add/Remove Patients").html_safe,
-            patient_add_remove_path %>
+            <li>
+              <%=link_to (content_tag(:i,nil,:class => "fa fa-user") + " Add/Remove Patients").html_safe,
+              patient_add_remove_path %>
           </li>
-        </ul>
+       </ul>
    </li>
 		<li>
 	   <a href="#"><i class="fa fa-info"></i> Events<span class="fa arrow"></span></a>

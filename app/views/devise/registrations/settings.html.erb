@@ -15,17 +15,22 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <!-- Nav tabs -->
-                          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab">Access Key Generation</a>
+                                <li class="active">
+                                  <a href="#home" data-toggle="tab">Access Key Generation</a>
                                 </li>
-                                <li><a href="#bmi" data-toggle="tab">BMI Calculation</a>
+                                <li>
+                                  <a href="#bmi" data-toggle="tab">BMI Calculation</a>
+                                </li>
+                                <li>
+                                  <a href="#doctor_tracking" data-toggle="tab">Doctor Permissions</a>
                                 </li>
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="home">
+                                  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
                                   <h4>Your access key:</h4>
                                   <p>Make sure you click "Update" after key generation.<p>
                                       <div class="form-group">
@@ -41,22 +46,15 @@
                                         <%= f.button :submit, "Update", class: "btn btn-success"%>
                                         <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
                                      </div>
-                                     <% end %>
-
+                                    <% end %>
                                 </div>
 
-
-
-                                <div class="tab-pane fade in active" id="bmi">
+                                <div class="tab-pane fade in" id="bmi">
                                   <h4>Select which device should be used for bmi/fat% calculation:</h4>
                                   <%= simple_form_for @setting,
                                   :url => url_for(:action => 'settings_save', :controller => 'registrations'),
                                   :method => 'post' do |f| %>
                                   <div class="form-group">
-
-                                    <div class="checkbox">
-                                      <%= f.input :allow_doctor_tracking, label: "Allow doctor to track you?", :inline_label => true %>
-                                    </div>
 
                                     <%= f.input :device_id,:collection => Device.all,
                                       :label_method => :name, :value_method => :id,
@@ -69,6 +67,25 @@
                                         :input_html => {:class => "form-control"} %>
                                       </div>
 
+                                      <div class="form-actions">
+                                        <%= f.button :submit, "Update", class: "btn btn-success"%>
+                                        <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
+                                     </div>
+
+                                     <% end %>
+                                </div>
+
+
+                                <div class="tab-pane fade in" id="doctor_tracking">
+                                  <h4>Click below to allow the doctor to track you</h4>
+                                  <%= simple_form_for @setting,
+                                  :url => url_for(:action => 'settings_save', :controller => 'registrations'),
+                                  :method => 'post' do |f| %>
+                                  <div class="form-group">
+
+                                    <div class="checkbox">
+                                      <%= f.input :allow_doctor_tracking, label: "Allow doctor to track you?", :inline_label => true %>
+                                    </div>
 
                                       <div class="form-actions">
                                         <%= f.button :submit, "Update", class: "btn btn-success"%>
@@ -77,6 +94,7 @@
 
                                      <% end %>
                                 </div>
+
                             </div>
                         </div>
                         <!-- /.panel-body -->

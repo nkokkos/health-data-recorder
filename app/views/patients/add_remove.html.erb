@@ -39,17 +39,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                              <% for user in User.all %>
+                                              <% for user in @patients_with_settings %>
                                               <tr>
                                                 <% if user.id == current_user.id %>
-                                                  <td><strong><%= user.username %></strong> (This is you)</td>
-                                                  <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
-                                                     :class=>"btn btn-primary btn-sm", :method => :post %></td>
-                                                <% elsif @user.username.size == 0 %>
+                                                  <!-- do nothing for the same user, don't fill anything -->
+                                                <% elsif user.username.size == 0 && user.id != @user.id && user.setting.allow_doctor_tracking == true %>
                                                   <td><p><strong>This patient has not entered his/name in settings</strong></td>
                                                   <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
                                                      :class=>"btn btn-primary btn-sm", :method => :post  %></td>
-                                                <% else %>
+                                                <% elsif user.username.size != 0 && user.id != @user.id && user.setting.allow_doctor_tracking == true %>
                                                        <td><p><strong><%= user.username %></strong></td>
                                                        <td><%= link_to "Add Patient", patient_relationships_path(:patient_id => user),
                                                           :class=>"btn btn-primary btn-sm", :method => :post  %></td>

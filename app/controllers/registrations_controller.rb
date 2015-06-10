@@ -15,37 +15,41 @@ class RegistrationsController < Devise::RegistrationsController
 
   def index
     @user = User.find(current_user.id)
+    @setting = @user.setting
   end
 
   def edit
     @user = User.find(current_user.id)
+    #@setting = @user.setting
   end
 
   def token
     @user = User.find(current_user.id)
     @user.generate_access_token # generate_token_ is defined in models/user.rb
+    @setting = @user.setting
     render "settings"
   end
 
   #def update_resource(resource, secure_params)
     #resource.update_without_password(secure_params)
   #end
-
+  
+  # this will load the settings view. need this controller to load user settings
   def settings
     @user = User.find(current_user.id)
     @setting = @user.setting
-    if @setting.nil?
-      setting = Setting.new
-      setting.save
-      @user.setting = setting
-    end
   end
 
   def settings_save
     @user = User.find(current_user.id)
     @setting = @user.setting
-    @setting.update(settings_params)
-    redirect_to patients_path
+    if @setting.update(settings_params)
+      flash[:alert] = 'Your settings were saved'
+      redirect_to users_settings_path
+    else
+      flash[:alert] = 'Error updating your settings'
+      redirect_to root_path
+    end
     #@setting = @user.setting.update(:patient_id => params[:patient_id])
     #@setting = @user.setting
   end
