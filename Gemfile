@@ -35,7 +35,6 @@ gem 'jquery-rails'
 #gem 'jquery-turbolinks'
 #require jquery.turbolink and require turbolinks in application.js file
 
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
@@ -62,9 +61,6 @@ gem 'better_errors'
 # administration
 gem 'rails_admin'
 #gem 'rails_admin_flatly_theme', github: 'konjoot/rails_admin_flatly_theme'
-
-# configation variables
-gem 'figaro'
 
 #graphing tools
 gem 'morrisjs-rails'
