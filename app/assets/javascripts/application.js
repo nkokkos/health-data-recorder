@@ -14,7 +14,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require app
-//= require menu_class_active
 //= require dataTables/jquery.dataTables
 //= require datatables-bootstrap
 //= require bootstrap-sprockets

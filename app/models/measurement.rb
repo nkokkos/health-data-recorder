@@ -4,6 +4,7 @@ class Measurement < ActiveRecord::Base
 
   #chart data method used by morris chart
   def self.chart_data(collection)
+    #create a collection of hashes
     collection.map do |created_at, measure_value|
       {
         created_at:created_at.strftime("%Y-%m-%d %H:%M:%S"),

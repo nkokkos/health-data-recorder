@@ -5,7 +5,7 @@
  */
 
 body {
-    background-color: #f9f9f9;
+    background-color: #f8f8f8;
 }
 
 #wrapper {
@@ -114,17 +114,17 @@ body {
     content: "\f107";
 }
 
+.sidebar .nav-second-level .deviceclass {
+    padding-left:  18px;
+}
+
 .sidebar .nav-second-level li,
 .sidebar .nav-third-level li {
     border-bottom: 0!important;
 }
 
 .sidebar .nav-second-level li a {
-    padding-left: 25px;
-}
-
-.sidebar .nav-second-level .deviceclass {
-    padding-left:  18px;
+    padding-left: 37px;
 }
 
 .sidebar .nav-third-level li a {
@@ -351,12 +351,6 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a {
     color: #f0ad4e;
-}
-
-
-.user_birth_date {
-   padding-top: 10px;
-   padding-bottom:10px;
 }
 
 .panel-yellow a:hover {
