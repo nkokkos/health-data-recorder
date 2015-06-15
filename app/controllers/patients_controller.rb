@@ -23,7 +23,7 @@ class PatientsController < ApplicationController
     end
 
     #check if the user is part of the current_user's patients collection
-    if current_user.patients.ids.include? user.id
+    if current_user.patients.ids.include? user.id && user.setting.allow_doctor_tracking?
       @user = user
       @sex = Sex.where(:id => @user.sex_id).first
       @current_age = User.age_calculation(@user.birth_date)
@@ -71,6 +71,10 @@ class PatientsController < ApplicationController
       elsif measure_row.nil?
         @device_name = "Error, user has not selected a measure device in his/her settings"
       end # if measure_row
+    elsif !user.setting.allow_doctor_tracking?
+      #flash a message and return to patients controller
+      flash[:error] = "The user has disallowed to see his/her profile"
+      redirect_to patients_path
     else
       #flash a message and return to patients controller
       flash[:notice] = "You are not allowed to view other patients!!"

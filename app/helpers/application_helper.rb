@@ -16,9 +16,11 @@ module ApplicationHelper
     nil
   end
 
+  #grabs the first part of the name after the @
+  #if the device's name is like device@233423
   def format_device(device)
     reg_exp = "([^@]+)"
     device.match(reg_exp)
   end
-  
+
 end

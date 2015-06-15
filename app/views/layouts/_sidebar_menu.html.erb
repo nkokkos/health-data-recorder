@@ -52,9 +52,9 @@
 		<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> My Charts<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
 		  <% Device.all.each do |dev| %>
+        <i class="deviceclass fa fa-arrow-right"></i><b><%= "  ".to_s + format_device(dev.name).to_s %></b>
         <% dev.measures.each do |measure| %>
           <li>
-            <i class="deviceclass"></i><b><%=format_device(dev.name)%></b>
             <%= link_to (content_tag(:i,nil,:class => "fa fa-plus-square fa-lg") + " #{measure.name}").html_safe,
             device_measure_path(dev.id, measure.id) %>
           </li>
@@ -63,6 +63,7 @@
 		</ul>
 		<!-- /.nav-second-level -->
 		</li>
+    <% if @user.both_roles? || @user.doctor_or_nurse? %>
     <li>
       <a href="#"><i class="fa fa-user"></i> Patients<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
@@ -76,15 +77,22 @@
           </li>
        </ul>
    </li>
+   <% end %>
 		<li>
 	   <a href="#"><i class="fa fa-info"></i> Events<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
-		  <li>
-		  <a href="#">Measurement Updates</a>
+      <% if @user.both_roles? || @user.doctor_or_nurse? %>
+      <li>
+		  <a href="#">Your Measurement Updates</a>
 		  </li>
 		  <li>
-		  <a href="#">Critical Errors</a>
+		  <a href="#">Triggers</a>
 		  </li>
+      <% elsif @user.role.nil? || @user.patient? %>
+      <li>
+      <a href="#">Your Measurement Updates</a>
+      </li>
+      <% end %>
 		</ul>
 		<!-- /.nav-second-level -->
 		</li>

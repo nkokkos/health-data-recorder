@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class PatientsController - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-add_remove">#add_remove</a>
+    
+    <li ><a href="#method-i-index">#index</a>
+    
+    <li ><a href="#method-i-show">#show</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-PatientsController">
+  <h1 id="class-PatientsController" class="class">
+    class PatientsController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_remove" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_remove</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_remove-source">
+            <pre><span class="ruby-comment"># File app/controllers/patients_controller.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_remove</span>
+
+  <span class="ruby-comment">#load the current user</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
+
+  <span class="ruby-comment">#load all the patients who have enabled the option &quot;Allow Doctor Tracking&quot;</span>
+  <span class="ruby-comment">#in their settings tab</span>
+  <span class="ruby-comment">#this will return the patients who have saved their settings table at</span>
+  <span class="ruby-comment">#least once</span>
+  <span class="ruby-ivar">@patients_with_settings</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:setting</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/patients_controller.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
+  <span class="ruby-ivar">@patients</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">patient_relationships</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>In show method, we have to show only the patients for the current user and
+prevent anyone else from peeping into other patient profiles. Normally this
+could be done by going to /patients/id. Implementation is done by checking
+an array returning the patient ids instead of using any other ruby
+authorization gems</p>
+          
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/patients_controller.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-comment">#grab user from the params and throw an exception if the user can not</span>
+  <span class="ruby-comment">#be found</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotFound</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-comment">#redirect_to patients_path and return if user.nil?</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">patients_path</span> <span class="ruby-comment"># putting return if user.nil? as above is redundant</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment">#check if the user is part of the current_user&#39;s patients collection</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">patients</span>.<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+    <span class="ruby-ivar">@sex</span> = <span class="ruby-constant">Sex</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">sex_id</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-ivar">@current_age</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">age_calculation</span>(<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">birth_date</span>)
+
+    <span class="ruby-comment">#grab setting from user that measures weight:</span>
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">measure_row</span> = <span class="ruby-constant">Measure</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">setting</span>.<span class="ruby-identifier">measure_id</span>) <span class="ruby-comment">#returns a relation</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotFound</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&#39;Measure not found&#39;</span>
+      <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">patients_path</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-comment">#flash[:error] = e.message + &quot; User has not updated settings for measure device&quot;</span>
+      <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-string">&quot;User has not updated settings for measure device&quot;</span>
+      <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">patients_path</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">measure_row</span>
+      <span class="ruby-comment">#grab device&#39;s name that measures weight</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-ivar">@device_name</span> = <span class="ruby-constant">Device</span>.<span class="ruby-identifier">find</span>(<span class="ruby-constant">Measure</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">measure_row</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">name</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">device_id</span>).<span class="ruby-identifier">name</span>
+        <span class="ruby-comment">#grab the latest created value for this user&#39;s weight:</span>
+        <span class="ruby-identifier">last_weight_measurement</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">measurements</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:measure_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">measure_row</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">:created_at</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;desc&quot;</span>).<span class="ruby-identifier">first</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_weight_measurement</span>.<span class="ruby-identifier">nil?</span>
+          <span class="ruby-ivar">@last_weight_measurement</span> = <span class="ruby-value">0</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-ivar">@last_weight_measurement</span> = <span class="ruby-identifier">last_weight_measurement</span>.<span class="ruby-identifier">measure_value</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-comment">#bmi_percent_fat_calculation is defined in application_controller.rb</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sex</span>.<span class="ruby-identifier">nil?</span>
+          <span class="ruby-ivar">@error_message</span> = <span class="ruby-string">&quot;Body Fat % and BMI require your age. Enter your correct birthday in the settings&quot;</span>
+          <span class="ruby-ivar">@bmi</span> = <span class="ruby-value">0</span>
+          <span class="ruby-ivar">@body_fat</span> = <span class="ruby-value">0</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-ivar">@bmi</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">bmi_percent_calculation</span>(<span class="ruby-ivar">@last_weight_measurement</span>,<span class="ruby-ivar">@user</span>.<span class="ruby-identifier">height</span>)
+          <span class="ruby-ivar">@body_fat</span> = <span class="ruby-constant">Measurement</span>.<span class="ruby-identifier">body_fat_through_bmi</span>(<span class="ruby-ivar">@bmi</span>,<span class="ruby-ivar">@current_age</span>, <span class="ruby-ivar">@sex</span>.<span class="ruby-identifier">id</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotFound</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-ivar">@device_name</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-comment">#flash[:error] = e.message + &quot; User has not updated settings for device&quot;</span>
+        <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;User has not updated settings for device standard error&quot;</span>
+        <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">patients_path</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">measure_row</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-ivar">@device_name</span> = <span class="ruby-string">&quot;Error, user has not selected a measure device in his/her settings&quot;</span>
+    <span class="ruby-keyword">end</span> <span class="ruby-comment"># if measure_row</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment">#flash a message and return to patients controller</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;You are not allowed to view other patients!!&quot;</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">patients_path</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

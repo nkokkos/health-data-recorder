@@ -33,7 +33,7 @@ class RegistrationsController < Devise::RegistrationsController
   #def update_resource(resource, secure_params)
     #resource.update_without_password(secure_params)
   #end
-  
+
   # this will load the settings view. need this controller to load user settings
   def settings
     @user = User.find(current_user.id)
@@ -44,6 +44,12 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.find(current_user.id)
     @setting = @user.setting
     if @setting.update(settings_params)
+      # if the user decides he/she does not want to be tracked by the Doctor
+      # then we should delete the relationship as well:
+      #@patient = current_user.patient_relationships.find(params[:id])
+      #@patient.destroy
+      #flash[:notice] = "Removed patient."
+      
       flash[:alert] = 'Your settings were saved'
       redirect_to users_settings_path
     else

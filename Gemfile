@@ -43,9 +43,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 #authentication
 gem 'devise'
-gem 'pundit'
-
+#dont use pundit for now
+#gem 'pundit'
 #gem 'rails_admin_pundit', :github => 'sudosu/rails_admin_pundit'
+
 
 #forms
 gem 'simple_form'
@@ -84,7 +85,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+#gem 'debugger', group: [:development, :test]
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 #gem 'tzinfo-data', platforms: [:mingw, :mswin]

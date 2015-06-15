@@ -2,6 +2,8 @@ class Measurement < ActiveRecord::Base
 
   belongs_to :measurement_block
 
+  after_commit :create_event, on: :create
+
   #chart data method used by morris chart
   def self.chart_data(collection)
     #create a collection of hashes
@@ -36,6 +38,15 @@ class Measurement < ActiveRecord::Base
 
   def device_id_enum
     Device.all.map { |u| ["#{u.name}", u.id] }
+  end
+
+
+  def create_event
+    id = self.id
+    device_id = self.device_id
+    measurement_block = self.measurement_block_id
+    measurement_blocks  = MeasurementBlock.where(:id => measurement_block)
+    logger.info "Data_create_event: #{id} #{device_id} #{measure_id} #{measurement_blocks.first.user_id}"
   end
 
 end

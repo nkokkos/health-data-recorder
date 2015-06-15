@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  #Use 3 roles for the user, patient, doctor_or_nurse or both_roles which
+  #means a doctor or nurse may have ability to track themselves also
+  enum role: [ :patient, :doctor_or_nurse, :both_roles ]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable,
@@ -9,8 +14,21 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :chronic_diseases, join_table: :chronic_diseases_users
 
-  has_many :patient_relationships
+
+  has_many :patient_relationships, class_name: "PatientRelationship",
+                                  foreign_key: "user_id",
+                                  dependent: :destroy
   has_many :patients, :through => :patient_relationships
+
+  # we are using this assosiation to show how many patients have selected
+  # this user in their settings. The association is:
+  # e.g @user.user_passive_patients
+  has_many :passive_patient_relationships, class_name:  "PatientRelationship",
+                                   foreign_key: "patient_id",
+                                   dependent:   :destroy
+
+  has_many :user_passive_patients, through: :passive_patient_relationships, :source => :user
+
 
   has_one :setting
 
@@ -24,6 +42,8 @@ class User < ActiveRecord::Base
     private_generate_token
   end
 
+  #Always set the birthday to the time of user creation. Then the user
+  #will have to update his/her settings with the correct birthday
   def set_birth_date
     self.birth_date = Time.now
   end
@@ -34,9 +54,20 @@ class User < ActiveRecord::Base
   end
 
 
-
   # used by rails_admin to display look up values correctly in /admin:
   # starts here:
+  #belongs_to :entity
+  rails_admin do
+    nested do
+      configure :measurement_block do
+        hide
+      end
+      configure :setting do
+        hide
+      end
+    end
+  end
+
   def family_status_id_enum
     FamilyStatus.all.map { |u| ["#{u.status}", u.id] }
   end
@@ -62,8 +93,8 @@ class User < ActiveRecord::Base
   end
   # ends here for rails_admin
 
-  private
 
+  private
   #generates a secure random key of 40 characters. Checks if
   #random key already exists
   def private_generate_token

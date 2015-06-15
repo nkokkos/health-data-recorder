@@ -1,7 +1,6 @@
 RailsAdmin.config do |config|
 
   ### Popular gems integration
-
   ## == Devise ==
   # config.authenticate_with do
   #   warden.authenticate! scope: :user
@@ -13,7 +12,6 @@ RailsAdmin.config do |config|
 
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
-
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
   config.actions do
@@ -31,19 +29,28 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
-  
+
   config.model 'Measurement' do
     exclude_fields :id, :measurement_block_id, :updated_at
   end
-  
-  config.model 'User' do 
-    exclude_fields :reset_password_token,
-	           :reset_password_sent_at,
-		   :current_sign_in_at,
-		   :last_sign_in_at,
-		   :current_sign_in_ip,
-		   :last_sign_in_ip
-				   
+
+  config.model 'User' do
+    new do
+      exclude_fields :username, :reset_password_token,
+         :reset_password_sent_at,
+         :current_sign_in_at,
+         :last_sign_in_at,
+         :current_sign_in_ip,
+         :last_sign_in_ip
+    end
+    show do
+      exclude_fields :reset_password_token,
+	    :reset_password_sent_at,
+		  :current_sign_in_at,
+		  :last_sign_in_at,
+		  :current_sign_in_ip,
+		  :last_sign_in_ip
+    end
   end
 
   # prevent from going to /admin unless user is admin
