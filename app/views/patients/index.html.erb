@@ -21,7 +21,8 @@
                                        <tr>
                                            <!-- <th>Device Id</th> -->
                                            <th>Patient Name</th>
-                                           <th>Action</th>
+                                           <th>Profile Actions</th>
+										   <th>Trigger Actions</th>
                                        </tr>
                                    </thead>
                                    <tbody>
@@ -29,7 +30,8 @@
                                          <tr>
                                            <td><%=find_patient_username(patient.patient_id)%></tb>
                                            <td><%=link_to "View Patient Profile", patient_path(patient.patient_id), { :class=>"btn btn-primary btn-sm" } %></td>
-                                          </tr>
+                                           <td><%=link_to "Create/View/Delete Triggers", root_path, { :class=>"btn btn-primary btn-sm" } %></td>
+										  </tr>
                                         <% end %>
                                    </tbody>
                                </table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615122201) do
+ActiveRecord::Schema.define(version: 20150619155020) do
 
   create_table "chronic_diseases", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -130,6 +130,25 @@ ActiveRecord::Schema.define(version: 20150615122201) do
     t.datetime "updated_at"
   end
 
+  create_table "trigger_blocks", force: :cascade do |t|
+    t.integer  "patient_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "trigger_blocks", ["user_id"], name: "index_trigger_blocks_on_user_id", using: :btree
+
+  create_table "triggers", force: :cascade do |t|
+    t.string   "condition",        limit: 255
+    t.float    "measure_value",    limit: 24
+    t.integer  "trigger_block_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "triggers", ["trigger_block_id"], name: "index_triggers_on_trigger_block_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
     t.string   "encrypted_password",     limit: 255,   default: "", null: false
@@ -174,4 +193,6 @@ ActiveRecord::Schema.define(version: 20150615122201) do
   add_foreign_key "measurement_blocks", "users"
   add_foreign_key "measurements", "measurement_blocks"
   add_foreign_key "settings", "users"
+  add_foreign_key "trigger_blocks", "users"
+  add_foreign_key "triggers", "trigger_blocks"
 end

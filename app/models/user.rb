@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
 
   has_many :measurement_blocks
   has_many :measurements, through: :measurement_blocks
-
+  has_many :trigger_blocks
+  has_many :triggers, through: :trigger_blocks
+  
+  
   has_and_belongs_to_many :chronic_diseases, join_table: :chronic_diseases_users
 
 
@@ -32,6 +35,7 @@ class User < ActiveRecord::Base
 
 
   has_one :setting
+  
 
   validates :height, :allow_nil => false, numericality: { only_integer: true }
 
