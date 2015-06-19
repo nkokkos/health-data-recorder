@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 20150615122201) do
     t.datetime "updated_at"
   end
 
+  create_table "doctor_watches_patients", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "patient_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "education_levels", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"

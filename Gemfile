@@ -61,7 +61,8 @@ gem 'better_errors'
 
 # administration
 gem 'rails_admin'
-#gem 'rails_admin_flatly_theme', github: 'konjoot/rails_admin_flatly_theme'
+
+gem 'rails_admin_flatly_theme', path: 'gems/rails_admin_flatly_theme'
 
 #graphing tools
 gem 'morrisjs-rails'
@@ -71,6 +72,7 @@ gem 'jquery-datatables-rails'
 
 #server gem is you're running this without passenger apache server
 #gem 'thin'
+gem 'puma'
 
 # new responders gem after it was extracted
 gem 'responders', '~> 2.0'
@@ -94,3 +96,21 @@ gem 'bcrypt', '~> 3.1.7'
 # for linux installation:
 gem 'tzinfo-data'
 gem 'tzinfo'
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  
+  gem 'derailed'
+  gem 'stackprof'
+
+end
+
+
+

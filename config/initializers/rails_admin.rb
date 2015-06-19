@@ -30,12 +30,17 @@ RailsAdmin.config do |config|
     # history_show
   end
 
+#disable custom rails_admin for now. Will try to implement
+#custom features per model (look in the models e.g user)  
+=begin
+  
   config.model 'Measurement' do
     exclude_fields :id, :measurement_block_id, :updated_at
   end
-
-  config.model 'User' do
-    new do
+ 
+   config.model 'User' do
+  
+    edit do
       exclude_fields :username, :reset_password_token,
          :reset_password_sent_at,
          :current_sign_in_at,
@@ -43,15 +48,23 @@ RailsAdmin.config do |config|
          :current_sign_in_ip,
          :last_sign_in_ip
     end
+  
     show do
       exclude_fields :reset_password_token,
-	    :reset_password_sent_at,
+	      :reset_password_sent_at,
 		  :current_sign_in_at,
 		  :last_sign_in_at,
 		  :current_sign_in_ip,
 		  :last_sign_in_ip
     end
+	
+	list do 
+		field :username
+    end
+  
   end
+  
+=end
 
   # prevent from going to /admin unless user is admin
   config.authorize_with do
