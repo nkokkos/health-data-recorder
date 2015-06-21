@@ -40,12 +40,12 @@ class Measurement < ActiveRecord::Base
     Device.all.map { |u| ["#{u.name}", u.id] }
   end
 
-
+  #just playing around with after commit triggers
   def create_event
     id = self.id
     device_id = self.device_id
-    measurement_block = self.measurement_block_id
-    measurement_blocks  = MeasurementBlock.where(:id => measurement_block)
+    measurement_block_id = self.measurement_block_id
+    measurement_blocks  = MeasurementBlock.where(:id => measurement_block_id)
     logger.info "Data_create_event: #{id} #{device_id} #{measure_id} #{measurement_blocks.first.user_id}"
   end
 

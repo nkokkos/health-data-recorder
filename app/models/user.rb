@@ -132,7 +132,9 @@ class User < ActiveRecord::Base
         setting = Setting.new
         setting.save
         user.setting = setting
-     end
+      else
+		setting.save
+	  end
     rescue StandardError => e
       logger.debug "update_setting_table exception: #{e.message}"
     end
