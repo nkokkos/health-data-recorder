@@ -27,7 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.find(current_user.id)
     @user.generate_access_token # generate_token_ is defined in models/user.rb
     @setting = @user.setting
-    render "settings"
+    render "settings" #will load the setting view
   end
 
   #def update_resource(resource, secure_params)
@@ -49,7 +49,7 @@ class RegistrationsController < Devise::RegistrationsController
       #@patient = current_user.patient_relationships.find(params[:id])
       #@patient.destroy
       #flash[:notice] = "Removed patient."
-      
+
       flash[:alert] = 'Your settings were saved'
       redirect_to users_settings_path
     else

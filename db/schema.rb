@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619222138) do
+ActiveRecord::Schema.define(version: 20150622090541) do
 
   create_table "chronic_diseases", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -131,10 +131,11 @@ ActiveRecord::Schema.define(version: 20150619222138) do
   end
 
   create_table "trigger_blocks", force: :cascade do |t|
-    t.integer  "patient_id", limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "patient_id",  limit: 4
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "description", limit: 255
   end
 
   add_index "trigger_blocks", ["user_id"], name: "index_trigger_blocks_on_user_id", using: :btree

@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     resources :measures, only: [:index, :show]
   end
 
+  #http://stackoverflow.com/questions/8706774/undefined-method-with-path-while-using-rails-form-for
+  #since I am not using the resources method:
+  get '/patients/:id/trigger_blocks',     to: 'trigger_blocks#index',   as: 'trigger_blocks'
+  get '/patients/:id/trigger_blocks/new', to: 'trigger_blocks#new',     as: 'new_trigger_block'
+  post '/patients/:id/trigger_blocks/',   to: 'trigger_blocks#create'
+  delete '/patients/:id/trigger_blocks/:trblock_id', to: 'trigger_blocks#destroy', as: 'destroy_trigger'
 
   #really need to put '/patients/add_remove' get method before show,
   #otherwise it does not work
