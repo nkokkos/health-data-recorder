@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: settings
+#
+#  id                    :integer          not null, primary key
+#  allow_doctor_tracking :boolean
+#  device_id             :integer
+#  measure_id            :integer
+#  user_id               :integer
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+
 class Setting < ActiveRecord::Base
   #setting table is used to store user preference on whether
   #the user wants to expose data to doctor/personell. Also, the

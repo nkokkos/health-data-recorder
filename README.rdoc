@@ -1,8 +1,8 @@
 == README
 
-Web Application for the Eltab Project. It collected data measuremets from
+Web Application for the Eltab Project. It collecs data measuremets from
 patients through a rest api interface. The application shows the data
-collectio in graphs.It provides a minimum of data separation based on 
+collectio in graphs.It provides a minimum of data separation based on
 user profiles and simple authorization.
 
 Things I really need to do:

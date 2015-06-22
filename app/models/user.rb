@@ -1,3 +1,39 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  username               :string(255)
+#  active                 :boolean
+#  admin                  :boolean
+#  sex_id                 :integer
+#  rfid_tag               :string(255)
+#  is_smoker              :boolean
+#  exercises              :boolean
+#  family_status_id       :integer
+#  birth_date             :date
+#  height                 :integer          default(0)
+#  education_level_id     :integer
+#  exercise_activity_id   :integer
+#  smoking_frequency_id   :integer
+#  employment_status_id   :integer
+#  additional_info        :text(65535)
+#  access_id              :string(255)
+#  role                   :integer
+#
+
 class User < ActiveRecord::Base
 
   #Use 3 roles for the user, patient, doctor_or_nurse or both_roles which
@@ -13,8 +49,8 @@ class User < ActiveRecord::Base
   has_many :measurements, through: :measurement_blocks
   has_many :trigger_blocks
   has_many :triggers, through: :trigger_blocks
-  
-  
+
+
   has_and_belongs_to_many :chronic_diseases, join_table: :chronic_diseases_users
 
 
@@ -30,12 +66,12 @@ class User < ActiveRecord::Base
                                            foreign_key: "patient_id",
                                            dependent:   :destroy
 
-  has_many :user_passive_patients, through: :passive_patient_relationships, 
+  has_many :user_passive_patients, through: :passive_patient_relationships,
                                             :source => :user
 
 
   has_one :setting
-  
+
 
   validates :height, :allow_nil => false, numericality: { only_integer: true }
 
@@ -59,13 +95,13 @@ class User < ActiveRecord::Base
   end
 
 
+  # start rails_admin configuration
   # used by rails_admin to display look up values correctly in /admin:
   # starts here:
   # belongs_to :entity
-  
   # http://stackoverflow.com/questions/10027569/rails-admin-modify-list-show-view-to-add-new-customized-column
   rails_admin do
-    
+
 	list do
       field :username
       field :email
@@ -75,20 +111,20 @@ class User < ActiveRecord::Base
       field :username
       field :email
     end
-	
-	edit do 
-	  field :username do 
+
+	edit do
+	  field :username do
 		 help 'Text to appear under the field'
 	  end
 	  field :email
 	end
-	
+
   end#rails_admin do
 
   def name
     self.username
   end
-  
+
   def family_status_id_enum
     FamilyStatus.all.map { |u| ["#{u.status}", u.id] }
   end
@@ -112,7 +148,7 @@ class User < ActiveRecord::Base
   def education_level_id_enum
     EducationLevel.all.map { |u| ["#{u.description}", u.id] }
   end
-  # ends here for rails_admin
+  # end rails_admin configuration
 
 
   private

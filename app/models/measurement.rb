@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: measurements
+#
+#  id                   :integer          not null, primary key
+#  measure_value        :float(24)
+#  device_id            :integer
+#  measure_id           :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#  measurement_block_id :integer
+#
+
 class Measurement < ActiveRecord::Base
 
   belongs_to :measurement_block

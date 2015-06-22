@@ -41,6 +41,9 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#annotation for models:
+gem 'annotate', '~> 2.6.6'
+
 #authentication
 gem 'devise'
 #dont use pundit for now

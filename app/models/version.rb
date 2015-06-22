@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: versions
+#
+#  id         :integer          not null, primary key
+#  version    :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Version < ActiveRecord::Base
 
   #class method to set the version of the web application
