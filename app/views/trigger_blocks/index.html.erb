@@ -31,14 +31,14 @@
                                            <td><%=trigger_block.description%></tb>
                                            <td><%=link_to "Create/View/Delete Triggers", root_path, { :class=>"btn btn-primary btn-sm" } %></td>
                                            <td><%= link_to content_tag(:i, "", class: "icon-trash icon-white") + "Delete this block",
-                                           destroy_trigger_path(:id => @patient.first.id, :trblock_id => trigger_block.id), method: :delete, class: "btn btn-danger btn-sm" %>
+                                           patient_trigger_block_path(:patient_id => @patient.first.id, :id => trigger_block.id), method: :delete, class: "btn btn-danger btn-sm" %>
 										                     </tr>
                                         <% end %>
                                    </tbody>
                                </table>
                            </div>
                            <div class="pull-right">
-                             <%= link_to content_tag(:i, "", class: "pull-right") + "Add New", new_trigger_block_path(@patient.first.id), class: "btn btn-success" %>
+                             <%= link_to content_tag(:i, "", class: "pull-right") + "Add New", new_patient_trigger_block_path(@patient.first.id), class: "btn btn-success" %>
                            </div>
                            <!-- /.table-responsive -->
                        </div>

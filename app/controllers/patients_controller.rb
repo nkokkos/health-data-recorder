@@ -22,6 +22,7 @@ class PatientsController < ApplicationController
       redirect_to patients_path # putting return if user.nil? as above is redundant
     end
 
+	if !user.nil?
     #check if the user is part of the current_user's patients collection
     if current_user.patients.ids.include? user.id && user.setting.allow_doctor_tracking?
       @user = user
@@ -80,7 +81,7 @@ class PatientsController < ApplicationController
       flash[:notice] = "You are not allowed to view other patients!!"
       redirect_to patients_path
     end
-
+   end
   end #show action
 
   def add_remove

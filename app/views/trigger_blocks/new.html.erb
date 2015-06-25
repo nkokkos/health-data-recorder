@@ -16,7 +16,7 @@
                        <!-- /.panel-heading -->
                        <div class="panel-body">
                          <div class="form-group">
-                         <%= simple_form_for(@trigger_block) do |f| %>
+                         <%= simple_form_for @trigger_block, :url => patient_trigger_blocks_path do |f| %>
                            <div class="form-group">
       									     <%= f.input :description, label: "Description for trigger block", required: true,
                              :input_html => {:class => "form-control", :placeholder => "Description for trigger block" } %>
@@ -26,7 +26,7 @@
                        <div class="form-actions">
                           <%= f.button :submit, "Update",  class: "btn btn-success"  %>
                         <%#= link_to  "Cancel", :back,   class: "btn btn-default"  %>
-                        <%= link_to  "Cancel", trigger_blocks_path,class: "btn btn-default"  %>
+                        <%= link_to  "Cancel",  patient_trigger_blocks_path ,class: "btn btn-default"  %>
                        </div>
                        <% end %>
 

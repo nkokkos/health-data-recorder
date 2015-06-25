@@ -1,12 +1,18 @@
 == README
 
-Web Application for the Eltab Project. It collecs data measuremets from
-patients through a rest api interface. The application shows the data
-collectio in graphs.It provides a minimum of data separation based on
-user profiles and simple authorization.
+Web Application for the Eltab Project. It collects data measuremets from
+patients through a rest api interface. 
 
-Things I really need to do:
-* Describe in better terms how this application functions
+The application shows the data collected in graphs. It provides a minimum of data 
+separation based on user profiles and simple authorization.
+
+* Description
+
+The user may have 3 roles: patient, doctor_or_nurse, both. If a user has the
+role of patient then he/she is able to see only his/her measurements. Through
+his/her settings may choose which doctors (users with the role of doctor_or_nurse) may
+have access to personal data. Last, if the user has the role of "both", it means it
+can act as a patient or as a doctor (basically it's for testing purposes)
 
 
 Things I need to update soon:

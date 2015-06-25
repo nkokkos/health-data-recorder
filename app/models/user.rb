@@ -52,7 +52,16 @@ class User < ActiveRecord::Base
 
 
   has_and_belongs_to_many :chronic_diseases, join_table: :chronic_diseases_users
-
+  
+  #http://guides.rubyonrails.org/association_basics.html
+  #http://stackoverflow.com/questions/19770888/rails-self-join-scheme-with-has-and-belongs-to-many
+  has_and_belongs_to_many :medical_personnel, 
+						   class_name: "User", 
+						   join_table: :medical_personnel, 
+                           foreign_key: :user_id, 
+                           association_foreign_key: :personnel_user_id
+  
+  
 
   has_many :patient_relationships, class_name: "PatientRelationship",
                                    foreign_key: "user_id",

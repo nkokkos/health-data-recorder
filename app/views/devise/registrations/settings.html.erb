@@ -25,6 +25,10 @@
                                 <li>
                                   <a href="#doctor_tracking" data-toggle="tab">Doctor Permissions</a>
                                 </li>
+								<li>
+                                  <a href="#doctor_watches" data-toggle="tab">Medical Personnel</a>
+                                </li>
+								
                             </ul>
 
                             <!-- Tab panes -->
@@ -86,16 +90,49 @@
                                     <div class="checkbox">
                                       <%= f.input :allow_doctor_tracking, label: "Allow doctor to track you?", :inline_label => true %>
                                     </div>
-
+									
                                       <div class="form-actions">
                                         <%= f.button :submit, "Update", class: "btn btn-success"%>
                                         <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
                                      </div>
-
                                      <% end %>
+									 
+									  
                                 </div>
-
                             </div>
+							
+							
+							<div class="tab-pane fade in" id="doctor_watches">
+                                  <h4>Click below to allow the doctor to track you</h4>
+                                  <%= simple_form_for @user,
+                                  :url => url_for(:action => 'update_medical_personnel', :controller => 'registrations'),
+                                  :method => 'post' do |f| %>
+                                  <div class="form-group">
+
+                                    			
+									<div class="form-group"
+									<% for user in User.all.order('username ASC') %>
+								    <div class="checkbox">
+									<label>
+								      <%= check_box_tag "user[medical_personnel_ids][]",
+								      user.id, @user.medical_personnel.include?(user) %>
+									  <%= user.username %>
+									  </label>
+									</div>
+								  <% end %>
+								  </div>
+                                      <div class="form-actions">
+                                        <%= f.button :submit, "Update", class: "btn btn-success"%>
+                                        <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
+                                     </div>
+                                     <% end %>
+									 
+									  
+                                </div>
+                            </div>
+							
+							
+														
                         </div>
                         <!-- /.panel-body -->
                     </div>

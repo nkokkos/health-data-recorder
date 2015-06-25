@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622090541) do
+ActiveRecord::Schema.define(version: 20150624225935) do
 
   create_table "chronic_diseases", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -99,6 +99,11 @@ ActiveRecord::Schema.define(version: 20150622090541) do
   end
 
   add_index "measures", ["device_id"], name: "index_measures_on_device_id", using: :btree
+
+  create_table "medical_personnel", force: :cascade do |t|
+    t.integer "user_id",           limit: 4
+    t.integer "personnel_user_id", limit: 4
+  end
 
   create_table "patient_relationships", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

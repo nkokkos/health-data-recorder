@@ -62,7 +62,8 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def settings_params
-    params.require(:setting).permit(:allow_doctor_tracking, :device_id, :measure_id)
+    params.require(:setting).permit(:allow_doctor_tracking, 
+	               :device_id, :measure_id)
   end
 
   def update
@@ -79,6 +80,30 @@ class RegistrationsController < Devise::RegistrationsController
       render "edit"
     end
   end
+  
+  def update_medical_personnel
+    @user = User.find(current_user.id)
+    if params.has_key?(:user)
+	#if @user.update_with_password(secure_params) #-> that's if you want to update with password prompt
+	  if @user.update_without_password(secure_params)
+	  #logger.debug "user.update_with_password"
+      #set_flash_message :notice, :updated
+  	  #sign_in @user, :bypass => true
+	    flash[:alert] = 'Your settings were saved'
+        redirect_to users_settings_path
+      else
+	    #logger.debug "rendering edit"
+        redirect_to root_path
+      end
+	else #has deselected all the checkboxes
+	  @user.medical_personnel_ids = [] # update the assosiated table.
+	  @user.save
+	  redirect_to users_settings_path
+	end
+
+  end
+  
+  
 
   def secure_params
 	  params.require(:user).permit(:email,
@@ -93,10 +118,11 @@ class RegistrationsController < Devise::RegistrationsController
 			:exercise_activity,
 			:exercise_activity_id,
 			:education_level_id,
-      :exercises,
+            :exercises,
 			:is_smoker,
 			:smoking_frequency_id,
 			:access_id,
+			{:medical_personnel_ids => []},
 			{:chronic_disease_ids => []})
   end
 

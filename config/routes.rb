@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get  "/users/settings"       => "registrations#settings"
     post "/users/settings_save"  => "registrations#settings_save"
-	  get  "/users/token"     => "registrations#token"
-	  get  "/users/notsignup" => "registrations#nosignup"
+	post "/users/update_medical_personnel" => "registrations#update_medical_personnel"
+	get  "/users/token"     => "registrations#token"
+	get  "/users/notsignup" => "registrations#nosignup"
   end
 
   get 'home/index'
@@ -22,21 +23,28 @@ Rails.application.routes.draw do
     resources :measures, only: [:index, :show]
   end
 
+  get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
+  
+  resources :patients do
+    resources :trigger_blocks do
+	  resources :triggers 
+	end
+  end
+  
   #http://stackoverflow.com/questions/8706774/undefined-method-with-path-while-using-rails-form-for
   #since I am not using the resources method:
-  get '/patients/:id/trigger_blocks',     to: 'trigger_blocks#index',   as: 'trigger_blocks'
-  get '/patients/:id/trigger_blocks/new', to: 'trigger_blocks#new',     as: 'new_trigger_block'
-  post '/patients/:id/trigger_blocks/',   to: 'trigger_blocks#create'
-  delete '/patients/:id/trigger_blocks/:trblock_id', to: 'trigger_blocks#destroy', as: 'destroy_trigger'
+  #get '/patients/:id/trigger_blocks',     to: 'trigger_blocks#index',   as: 'trigger_blocks'
+  #get '/patients/:id/trigger_blocks/new', to: 'trigger_blocks#new',     as: 'new_trigger_block'
+  #post '/patients/:id/trigger_blocks/',   to: 'trigger_blocks#create'
+  #delete '/patients/:id/trigger_blocks/:trblock_id', to: 'trigger_blocks#destroy', as: 'destroy_trigger'
 
   #really need to put '/patients/add_remove' get method before show,
   #otherwise it does not work
   #see this stackoverflow question/answer:
   #http://stackoverflow.com/questions/25298949/rails-in-controller-a-new-view-is-always-rendered-by-show
-  get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
-
-  get '/patients',            to: 'patients#index'
-  get '/patients/:id',        to: 'patients#show', as: 'patient'
+  #get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
+  #get '/patients',            to: 'patients#index'
+  #get '/patients/:id',        to: 'patients#show', as: 'patient'
 
   resources :patient_relationships
 
