@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'triggers/show'
+
+  get 'triggers/index'
+
+  get 'triggers/edit'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users, :controllers => { :registrations => "registrations" }
@@ -57,9 +63,9 @@ Rails.application.routes.draw do
   # make sure you input the default format json:
   namespace :api do
     get  '/devices', to: 'devices#index',  defaults: { format: 'json' }
-	  get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
-	  get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
-	  get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
+	get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
+	get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
+	get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
     post '/measurement_blocks/create', to: 'measurement_blocks#create',  defaults: { format: 'json' }
   	post '/measurements/create', to: 'measurements#create',  defaults: { format: 'json' }
   end

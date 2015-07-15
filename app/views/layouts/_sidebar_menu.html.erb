@@ -63,7 +63,7 @@
 		</ul>
 		<!-- /.nav-second-level -->
 		</li>
-    <% if @user.both_roles? || @user.doctor_or_nurse? %>
+    <% if current_user.both_roles? || current_user.doctor_or_nurse? %>
     <li>
       <a href="#"><i class="fa fa-user"></i> Patients<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">

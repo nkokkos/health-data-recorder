@@ -105,6 +105,7 @@ class User < ActiveRecord::Base
 
 
   # start rails_admin configuration
+  
   # used by rails_admin to display look up values correctly in /admin:
   # starts here:
   # belongs_to :entity
@@ -126,6 +127,12 @@ class User < ActiveRecord::Base
 		 help 'Text to appear under the field'
 	  end
 	  field :email
+	  field :password
+	  field :password_confirmation
+	  field :sex_id
+	  field :role do
+	    searchable false
+	  end
 	end
 
   end#rails_admin do
@@ -133,6 +140,21 @@ class User < ActiveRecord::Base
   def name
     self.username
   end
+  
+  #https://github.com/sferik/rails_admin/issues/1993
+  def role_enum
+    self.class.roles.to_a
+  end
+  
+  #https://github.com/sferik/rails_admin/issues/1993
+  def role= value
+    if value.kind_of?(String) and value.to_i.to_s == value
+      super value.to_i
+    else
+      super value
+    end
+  end
+  
 
   def family_status_id_enum
     FamilyStatus.all.map { |u| ["#{u.status}", u.id] }

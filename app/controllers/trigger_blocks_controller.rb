@@ -1,7 +1,6 @@
 class TriggerBlocksController < ApplicationController
   before_filter :authenticate_user!, :only => [:index, :new, :edit, :show]
 
-
   def index
     @user = User.find(current_user)
     @patient = @user.patients.where(:id => params[:patient_id] )

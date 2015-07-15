@@ -21,6 +21,12 @@
                             <div class="row">
                                 <div class="col-lg-6">
 								<h3>1. Basic Information:</h3>
+								        <div class="form-group">
+										  <%#="http://bottleupandexplode.com/blog/2014/06/enums-in-rails-4-1-forms" %>
+										  <%= f.input :role, disabled: true, collection: User.roles.map {|k, v| [k, k]}, :input_html => {:class => "form-control" }, 
+										  hint: "You cannot change your Role.It's assigned by the administrator." %>
+                                          <%#= f.role :email, disabled: true, autofocus: false, hint: "You cannot change your role." :input_html => {:class ="orm-control" } %>
+                                        </div>
                                         <div class="form-group">
                                           <%= f.input :email, required: true, autofocus: true, :input_html => {:class => "form-control" } %>
                                         </div>
@@ -103,23 +109,29 @@
 								      </div>
 								  </div>
 								  -->
-								 <div class="form-actions">
+								  <div class="form-actions">
 								    <%= f.button :submit, "Update",  class: "btn btn-success"  %>
 									<%#= link_to  "Cancel", :back,   class: "btn btn-default"  %>
 									<%= link_to  "Cancel", root_path,class: "btn btn-default"  %>
 								 </div>
 								<% end %>
+								 
                   <!-- /.col-lg-6 (nested) -->
                 </div>
                 <!-- /.row (nested) -->
                 </div>
                         <!-- /.panel-body -->
                     <!-- /.panel -->
+					
+					
                 </div>
+				
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- /.row -->
+			            <!-- /.row -->
         </div>
+		
+
         <!-- /#page-wrapper -->
     </div>
 </div>

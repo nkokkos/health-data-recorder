@@ -21,16 +21,19 @@ class PatientsController < ApplicationController
       #redirect_to patients_path and return if user.nil?
       redirect_to patients_path # putting return if user.nil? as above is redundant
     end
+	
+	#logger.debug "Person attributes hash: #{current_user.patients.ids.include? user.id}"
+    #logger.debug "Person attributes hash: #{user.setting.allow_doctor_tracking?}"
+	#logger.debug "Person attributes hash: #{user.id}"
 
 	if !user.nil?
     #check if the user is part of the current_user's patients collection
-    if current_user.patients.ids.include? user.id && user.setting.allow_doctor_tracking?
+    if (user.setting.allow_doctor_tracking?) && current_user.patients.ids.include?(user.id)
       @user = user
       @sex = Sex.where(:id => @user.sex_id).first
       @current_age = User.age_calculation(@user.birth_date)
 
       #grab setting from user that measures weight:
-
       begin
         measure_row = Measure.where(:id => @user.setting.measure_id) #returns a relation
       rescue ActiveRecord::RecordNotFound => e

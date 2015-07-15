@@ -24,6 +24,6 @@
 </div>
 </body>
 <div id="footer_page">
-  SchemaVersion:<%= ActiveRecord::Migrator.current_version %>, WebAppVersion: 0.1.1
+  SchemaVersion:<%= ActiveRecord::Migrator.current_version %>, WebAppVersion: <%=Version.all.first.version%>
 </div>
 </html>
