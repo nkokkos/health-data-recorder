@@ -46,10 +46,9 @@ class RegistrationsController < Devise::RegistrationsController
     if @setting.update(settings_params)
       # if the user decides he/she does not want to be tracked by the Doctor
       # then we should delete the relationship as well:
-      #@patient = current_user.patient_relationships.find(params[:id])
-      #@patient.destroy
-      #flash[:notice] = "Removed patient."
-
+      # @patient = current_user.patient_relationships.find(params[:id])
+      # @patient.destroy
+      # flash[:notice] = "Removed patient."
       flash[:alert] = 'Your settings were saved'
       redirect_to users_settings_path
     else
