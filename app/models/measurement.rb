@@ -15,7 +15,7 @@ class Measurement < ActiveRecord::Base
 
   belongs_to :measurement_block
 
-  after_commit :create_event, on: :create
+  #after_commit :create_event, on: :create
 
   #chart data method used by morris chart
   def self.chart_data(collection)
@@ -42,6 +42,45 @@ class Measurement < ActiveRecord::Base
     end
   end
 
+  def self.build_sql(user_id)
+    user = User.find(user_id)
+    trigger_block = user.trigger_blocks.last
+	triggers = trigger_block.triggers
+    #puts triggers
+	
+	sql_test = "select measure_value from measurements where "
+	sql = ""
+	
+	#puts triggers.size
+	
+	if triggers.size == 1 
+	  sql << " measure_value #{triggers.first.condition} #{triggers.first.measure_value} and measure_id=#{triggers.first.measure_id}" 
+	  sql << " and device_id=#{triggers.first.device_id}"
+	elsif triggers.size > 1 
+	  triggers.each do |t|
+	   if !t.equal? triggers.last
+	     sql << " measure_value #{t.condition} #{t.measure_value} and measure_id=#{t.measure_id}" 
+	     sql << " and device_id=#{t.device_id} and"
+	   elsif t.equal? triggers.last
+	     sql << " measure_value #{t.condition} #{t.measure_value} and measure_id=#{t.measure_id}" 
+	     sql << " and device_id=#{t.device_id}"
+	   end
+	  end
+	end
+	
+	if sql.blank?
+	  puts "no sql"
+	else
+	  sql_test << sql 
+	  out = Measurement.find_by_sql(sql_test)
+	  out.size
+	  if out.any?
+	   "puts any"
+	  end
+	end
+	
+  end
+  
 
   # measure_id_enum and device_id_enum are methods used by rails_admin
   # to populate the select boxes

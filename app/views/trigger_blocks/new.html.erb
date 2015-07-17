@@ -2,7 +2,7 @@
        <div id="page-wrapper">
            <div class="row">
                <div class="col-lg-12">
-                   <h2 class="page-header">Enter Name for Trigger Block</h2>
+                   <h3 class="page-header">Enter Name for Trigger Block:</h3>
                </div>
                <!-- /.col-lg-12 -->
            </div>
@@ -11,22 +11,23 @@
                <div class="col-lg-12">
                    <div class="panel panel-default">
                        <div class="panel-heading">
-                        Trigger Blocks:
+                        Trigger Block Name:
                        </div>
                        <!-- /.panel-heading -->
                        <div class="panel-body">
                          <div class="form-group">
                          <%= simple_form_for @trigger_block, :url => patient_trigger_blocks_path do |f| %>
                            <div class="form-group">
-      									     <%= f.input :description, label: "Description for trigger block", required: true,
+      						  <%= f.input :description, label: "Description for trigger block", required: true,
                              :input_html => {:class => "form-control", :placeholder => "Description for trigger block" } %>
-      									   </div>
+      						</div>
                          </div>
 
                        <div class="form-actions">
-                          <%= f.button :submit, "Update",  class: "btn btn-success"  %>
-                        <%#= link_to  "Cancel", :back,   class: "btn btn-default"  %>
-                        <%= link_to  "Cancel",  patient_trigger_blocks_path ,class: "btn btn-default"  %>
+                         <%= link_to  "Cancel", :back,   class: "btn btn-default"  %>
+						 <%= f.button :submit, "Create",  class: "btn btn-success"  %>
+                         <%#= link_to  "Cancel", :back,   class: "btn btn-default"  %>
+                         <%#= link_to  "Cancel",  patient_trigger_blocks_path ,class: "btn btn-default"  %>
                        </div>
                        <% end %>
 

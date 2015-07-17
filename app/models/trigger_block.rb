@@ -12,5 +12,6 @@
 
 class TriggerBlock < ActiveRecord::Base
   belongs_to :user
-  has_many   :triggers
+  validates  :description, presence: true
+  has_many   :triggers, dependent: :destroy
 end

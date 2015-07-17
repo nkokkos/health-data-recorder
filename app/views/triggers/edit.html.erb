@@ -16,10 +16,15 @@
                        <!-- /.panel-heading -->
                        <div class="panel-body">
                          <div class="form-group">
-                         <%= simple_form_for @trigger, :url =>  edit_patient_trigger_block_trigger_path  do |f| %>
+                         <%= simple_form_for @trigger, :url =>  patient_trigger_block_trigger_path  do |f| %>
                            <div class="form-group">
 						     <%#= f.input :sex_id,:collection => Sex.all, :label_method => :description, :value_method => :id, :label => "Select your Sex:", :include_blank => true, :input_html => {:class => "form-control",  :placeholder => "Enter your sex"} %>
-      						 <%= f.input :measure_id, :collection => Measure.all, :label_method => :name, :value_method => :id, label: "Select Measure Type", required: true,
+      						 <%= f.input :condition, :collection => ['>','>=','<','<='], 
+							   :label => "Select Condition:", 
+							   :include_blank => false, 
+							   :input_html => {:class => "form-control"}
+							 %>
+							 <%= f.input :measure_id, :collection => Measure.all, :label_method => :name, :value_method => :id, label: "Select Measure Type", required: true,
                              :input_html => {:class => "form-control", :placeholder => "Select Measure Type" } %>
 							 <%= f.input :device_id, :collection => Device.all, label: "Select Device", required: true,
                              :input_html => {:class => "form-control", :placeholder => "Select Device" } %>
@@ -29,9 +34,9 @@
                          </div>
 
                        <div class="form-actions">
+					    <%= link_to  "Cancel", :back,   class: "btn btn-default"  %>
                         <%= f.button :submit, "Update",  class: "btn btn-success"  %>
-                        <%#= link_to  "Cancel", :back,   class: "btn btn-default"  %>
-                        <%= link_to  "Cancel",  patient_trigger_blocks_path ,class: "btn btn-default"  %>
+                        <%#= link_to  "Cancel",  patient_trigger_blocks_path ,class: "btn btn-default"  %>
                        </div>
                        <% end %>
 

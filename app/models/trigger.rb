@@ -14,4 +14,6 @@
 
 class Trigger < ActiveRecord::Base
   belongs_to :trigger_block
+  
+  validates :measure_value, :device_id, :measure_id, presence: true
 end

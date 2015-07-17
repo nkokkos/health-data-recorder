@@ -1,20 +1,21 @@
 class TriggerBlocksController < ApplicationController
-  before_filter :authenticate_user!, :only => [:index, :new, :edit, :show]
+  before_filter :load_current_user, :authenticate_user!, :only => [:index, :new, :edit, :show]
 
   def index
-    @user = User.find(current_user)
+    #@user = User.find(current_user)
     @patient = @user.patients.where(:id => params[:patient_id] )
     @trigger_blocks = current_user.trigger_blocks
   end
 
 
   def new
-    @user = User.find(current_user)
+    #@user = User.find(current_user)
     @trigger_block = TriggerBlock.new
   end
 
   def create
-    @trigger_block = TriggerBlock.new(trigger_block_params)
+    @user = User.find(current_user.id)
+    @trigger_block = TriggerBlock.create(trigger_block_params)
     @trigger_block.patient_id = params[:patient_id] # this id refers to the patient_id
     @trigger_block.user_id    = current_user.id
 
@@ -45,4 +46,8 @@ class TriggerBlocksController < ApplicationController
     params.require(:trigger_block).permit(:description,:id)
   end
 
+  def load_current_user
+    @user = User.find(current_user.id)
+  end
+  
 end
