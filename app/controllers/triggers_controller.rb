@@ -31,6 +31,8 @@ class TriggersController < ApplicationController
     @trigger = @trigger_block.first.triggers.create(trigger_params)	
 	respond_to do |format|
      if @trigger.save
+	 
+	    Resque.enqueue(ExecuteTriggers)
         format.html { redirect_to  patient_trigger_block_triggers_path , notice: 'Trigger was successfully created.' }
         #format.json { render :show, status: :created, location: @trigger }
       else

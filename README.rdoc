@@ -14,6 +14,10 @@ his/her settings may choose which doctors (users with the role of doctor_or_nurs
 have access to personal data. Last, if the user has the role of "both", it means it
 can act as a patient or as a doctor (basically it's for testing purposes)
 
+Resque Jobs 
+http://tutorials.jumpstartlab.com/topics/performance/background_jobs.html
+https://github.com/jherrm/Resque-Scheduler-Example
+
 
 Things I need to update soon:
 

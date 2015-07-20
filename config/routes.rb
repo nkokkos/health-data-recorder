@@ -1,3 +1,5 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
 
   get 'triggers/show'
@@ -8,6 +10,10 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  # Of course, you need to substitute your application name here, a block
+  # like this probably already exists.
+  mount Resque::Server.new, at: "/resque"
+  
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   #http://stackoverflow.com/questions/20599714/rails-add-new-view-to-devise
