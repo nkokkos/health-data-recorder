@@ -4,7 +4,7 @@ class TriggerBlocksController < ApplicationController
   def index
     #@user = User.find(current_user)
     @patient = @user.patients.where(:id => params[:patient_id] )
-    @trigger_blocks = current_user.trigger_blocks
+    @trigger_blocks = current_user.trigger_blocks.where(:patient_id => params[:patient_id] )
   end
 
 

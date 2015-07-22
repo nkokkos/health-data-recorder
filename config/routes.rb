@@ -10,8 +10,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  # Of course, you need to substitute your application name here, a block
-  # like this probably already exists.
+  # Resque Server UI
   mount Resque::Server.new, at: "/resque"
   
   devise_for :users, :controllers => { :registrations => "registrations" }
@@ -30,7 +29,10 @@ Rails.application.routes.draw do
 
   get '/devices',     to: 'devices#index'
   get '/devices/:id', to: 'devices#show', as: 'device'
-
+  
+  get '/events', to: 'events#index', as: 'event'
+  
+  
   resources :devices, only: [:index, :show] do
     resources :measures, only: [:index, :show]
   end

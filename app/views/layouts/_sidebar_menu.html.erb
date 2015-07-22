@@ -86,8 +86,11 @@
 		  <a href="#">Your Measurement Updates</a>
 		  </li>
 		  <li>
-		  <a href="#">Triggers</a>
-		  </li>
+           <%=link_to (content_tag(:i,nil,:class => "fa fa-user") + " Your Triggers").html_safe,
+              event_path %>
+          </li>
+		  
+		  
       <% elsif @user.role.nil? || @user.patient? %>
       <li>
       <a href="#">Your Measurement Updates</a>

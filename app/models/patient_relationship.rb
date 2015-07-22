@@ -10,7 +10,7 @@
 #
 
 class PatientRelationship < ActiveRecord::Base
-  #this model is self referencial model referring to patients who happen
+  #this model is a self referencial model referring to patients who happen
   #to be users
   belongs_to :user,    :class_name => 'User'
   belongs_to :patient, :class_name => 'User'

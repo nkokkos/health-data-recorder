@@ -22,3 +22,6 @@
 //= require raphael
 //= require morris
 //= require devices
+//= require events
+//= require patients
+//= require patient_relationships

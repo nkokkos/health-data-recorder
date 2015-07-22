@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $('#patients-raw-data').dataTable()
+  $('#events-raw-data').dataTable()
   "scrollX": false
   "scrollY": false
+

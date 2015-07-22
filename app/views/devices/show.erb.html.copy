@@ -87,13 +87,6 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-
-
-
-
-
-
-
                     <!-- /.panel -->
             </div>
             <!-- /.row -->
@@ -101,5 +94,4 @@
         <!-- /#page-wrapper -->
     </div>
 </div>
-	<%#= debug @user %>
 </body>

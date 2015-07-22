@@ -32,7 +32,7 @@ class PatientsController < ApplicationController
       @user = user
       @sex = Sex.where(:id => @user.sex_id).first
       @current_age = User.age_calculation(@user.birth_date)
-
+      @user_measurements = @user.measurements
       #grab setting from user that measures weight:
       begin
         measure_row = Measure.where(:id => @user.setting.measure_id) #returns a relation

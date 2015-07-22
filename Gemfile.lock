@@ -52,7 +52,7 @@ GEM
       json
     bcrypt (3.1.10)
     bcrypt (3.1.10-x86-mingw32)
-    benchmark-ips (2.2.0)
+    benchmark-ips (2.3.0)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
