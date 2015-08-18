@@ -2,7 +2,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">Trigger Events from patients</h3>
+                    <h3 class="page-header">Your Measurements</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -18,16 +18,18 @@
                                 <table id="events-raw-data" class="cell-border table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Patient Name</th>
-                                            <th>Trigger Message</th>
+                                            <th>Measure Value</th>
+                                            <th>Device</th>
+											<th>Measure Type</th>
 											<th>Created At:</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% @events.each do |dataelements| %>
+                                        <% @measurements.each do |dataelements| %>
                                         <tr>
-                                          <td><%=User.find(dataelements.patient_id).name %></td>
-                                          <td><%=dataelements.message %></td>
+                                          <td><%=dataelements.measure_value %></td>
+                                          <td><%=Device.find(dataelements.device_id).name %></td>
+										  <td><%=Measure.find(dataelements.measure_id).name %></td>
 										  <td><%=dataelements.created_at %></td>
                                         </tr>
                                         <% end %>

@@ -3,9 +3,7 @@ require 'resque/server'
 Rails.application.routes.draw do
 
   get 'triggers/show'
-
   get 'triggers/index'
-
   get 'triggers/edit'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -31,7 +29,7 @@ Rails.application.routes.draw do
   get '/devices/:id', to: 'devices#show', as: 'device'
   
   get '/events', to: 'events#index', as: 'event'
-  
+  get '/measurement_updates', to: 'measures#updates', as: 'measurement_update'
   
   resources :devices, only: [:index, :show] do
     resources :measures, only: [:index, :show]

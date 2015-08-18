@@ -14,6 +14,21 @@
 class Measurement < ActiveRecord::Base
 
   belongs_to :measurement_block
+  
+  #just tests:
+  #scope :within_range, -> { where("created_at <= ? AND created_at >= ?", Date.today + 100, Date.today - 100) }
+  #scope :test, -> { where('measurements.created_at < ?', 1.week.ago) }
+  
+  scope :last_7_days,   -> { where("measurements.created_at <= ? and measurements.created_at >= ?", 
+						     Date.today, Date.today - 7)  }
+  scope :last_30_days,  -> { where("measurements.created_at <= ? and measurements.created_at >= ?", 
+							 Date.today, Date.today - 30) }
+  scope :last_6_months, -> { where("measurements.created_at <= ? and measurements.created_at >= ?", 
+							 Date.today, Date.today - 6.months) }
+  #extract should work for postgres too, for now, this works for mysql							 
+  scope  :current_year,  -> { where('extract(year from measurements.created_at)=?', Time.current.year) }
+  scope  :last_year,     -> { where('extract(year from measurements.created_at)=?', Time.current.year - 1) }
+  
 
   #after_commit :create_event, on: :create
 
@@ -134,7 +149,7 @@ class Measurement < ActiveRecord::Base
   end #def self.build_sql...
 	 
   # measure_id_enum and device_id_enum are methods used by rails_admin
-  # to populate the select boxes
+  # to populate the select boxes:
   def measure_id_enum
     Measure.all.map { |u| ["#{u.name}", u.id] }
   end

@@ -83,17 +83,17 @@
 		<ul class="nav nav-second-level">
       <% if @user.both_roles? || @user.doctor_or_nurse? %>
       <li>
-		  <a href="#">Your Measurement Updates</a>
+		  <%=link_to (content_tag(:i,nil,:class => "fa fa-database") + " Your Measurements").html_safe,
+              measurement_update_path %>
 		  </li>
 		  <li>
-           <%=link_to (content_tag(:i,nil,:class => "fa fa-user") + " Your Triggers").html_safe,
+           <%=link_to (content_tag(:i,nil,:class => "fa fa-ambulance") + " Your Triggers").html_safe,
               event_path %>
-          </li>
-		  
-		  
+          </li>	  
       <% elsif @user.role.nil? || @user.patient? %>
       <li>
-      <a href="#">Your Measurement Updates</a>
+     <%=link_to (content_tag(:i,nil,:class => "fa fa-ambulance") + " Your Triggers").html_safe,
+              event_path %>
       </li>
       <% end %>
 		</ul>

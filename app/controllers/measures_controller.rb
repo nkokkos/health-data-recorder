@@ -1,6 +1,8 @@
 class MeasuresController < ApplicationController
 
-  def index
+  def updates
+   @user = User.find(current_user.id)
+   @measurements = @user.measurements.all.order(:created_at => "asc")
   end
 
   def show
