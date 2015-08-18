@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 
 #gem 'pg'
+#use mysql2 insteaf of postgres:
 gem 'mysql2'
 
 # Use SCSS for stylesheets
@@ -16,6 +17,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '>=4.1.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# don't need the following since installation is done on a linux box with
+# node.js installed.
 # gem 'therubyracer',  platforms: :ruby
 
 # use execjs as asset compiler. You have to have nodejs installed for this
@@ -26,8 +29,8 @@ gem 'jquery-rails'
 
 #gem 'bootstrap-datepicker-rails'
 
-# disable turbolinks, it breaks the app
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+#Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+#disable turbolinks, it breaks the app
 #gem 'turbolinks'
 
 #jquery-turbolinks requires:  //= require jquery.turbolinks
@@ -50,7 +53,6 @@ gem 'devise'
 #gem 'pundit'
 #gem 'rails_admin_pundit', :github => 'sudosu/rails_admin_pundit'
 
-
 #forms
 gem 'simple_form'
 
@@ -64,13 +66,14 @@ gem 'better_errors'
 
 # administration
 gem 'rails_admin'
-
+# administration theme:
 gem 'rails_admin_flatly_theme', path: 'gems/rails_admin_flatly_theme'
 
 #graphing tools
 gem 'morrisjs-rails'
 gem 'raphael-rails'
 
+#jquery datatables
 gem 'jquery-datatables-rails'
 
 #server gem is you're running this without passenger apache server
@@ -115,7 +118,7 @@ group :development, :test do
   
   gem 'derailed'
   gem 'stackprof'
-
+  
 end
 
 

@@ -15,7 +15,7 @@ $ ->
     pointFillColors: ['#ffffff']
     pointStrokeColors: ['green']
 
-$ ->
-  $('#device-raw-data').dataTable()
+$(document).ready ->
+  $('#device-raw-data').DataTable()
   "scrollX": false
   "scrollY": false

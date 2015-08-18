@@ -14,14 +14,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require app
-//= require dataTables/jquery.dataTables
-//= require datatables-bootstrap
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require metisMenu
 //= require raphael
 //= require morris
-//= require devices
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require events
-//= require patients
-//= require patient_relationships
+//= require measures
+

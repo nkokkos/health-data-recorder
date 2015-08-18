@@ -54,7 +54,7 @@ class HomeController < ApplicationController
         @device_name = e.message
       rescue StandardError => e
         #flash[:error] = e.message + " User has not updated settings for device"
-        flash[:error] = "You have not updated settings for device/measures. Please do so"
+        flash[:error] = "You have not updated your settings for device/measures!"
         #redirect_to root_path
       end
     elsif measure_row.nil?
