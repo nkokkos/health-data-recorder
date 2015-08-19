@@ -9,7 +9,7 @@ $ ->
     xkey: 'created_at'
     ykeys: ['data']
     labels: ['data']
-    pointSize: 4
+    pointSize: 5
     hideHover: 'auto'
     resize: true
     pointFillColors: ['#ffffff']
@@ -19,3 +19,4 @@ $(document).ready ->
   $('#device-raw-data').DataTable()
   "scrollX": false
   "scrollY": false
+

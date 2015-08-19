@@ -10,8 +10,12 @@ $ ->
     resize: true
     pointFillColors: ['#ffffff']
     pointStrokeColors: ['green']
-
+	
 $ ->
   $('#device-raw-data').dataTable()
   "scrollX": false
   "scrollY": false
+  
+$ -> 
+  $(".dropdown-menu li a").click ->
+    alert(window.location.href)

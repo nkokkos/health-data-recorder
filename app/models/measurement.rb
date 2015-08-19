@@ -15,7 +15,7 @@ class Measurement < ActiveRecord::Base
 
   belongs_to :measurement_block
   
-  #just tests:
+  #just simple tests with scope, typed in here for reference:
   #scope :within_range, -> { where("created_at <= ? AND created_at >= ?", Date.today + 100, Date.today - 100) }
   #scope :test, -> { where('measurements.created_at < ?', 1.week.ago) }
   
@@ -32,9 +32,10 @@ class Measurement < ActiveRecord::Base
 
   #after_commit :create_event, on: :create
 
-  #chart data method used by morris chart
+  #Chart data method used by morris chart:
+  #It creates a collection of hashes from an active record relation so that
+  #morris chart can graph it
   def self.chart_data(collection)
-    #create a collection of hashes
     collection.map do |created_at, measure_value|
       {
         created_at:created_at.strftime("%Y-%m-%d %H:%M:%S"),

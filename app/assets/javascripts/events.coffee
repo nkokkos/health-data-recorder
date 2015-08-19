@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('#events-raw-data').DataTable()
+  $('#events-raw-data').dataTable()
   "scrollX": false
   "scrollY": false
   

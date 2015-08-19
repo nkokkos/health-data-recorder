@@ -22,5 +22,9 @@ module ApplicationHelper
     reg_exp = "([^@]+)"
     device.match(reg_exp)
   end
-
+  
+  def absolute_url
+    request.base_url + request.original_fullpath
+  end
+  
 end
