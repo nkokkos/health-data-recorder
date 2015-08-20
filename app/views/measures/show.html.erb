@@ -12,7 +12,7 @@
                 <div class="col-lg-12">
 					<div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i>History:
+                            <i class="fa fa-bar-chart-o fa-fw"></i>History: (Default view range is "Last 6 Months")
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -21,17 +21,21 @@
                                     </button>
                                     <ul class="dropdown-menu pull-right" role="menu">
                                         <li >
-										  <a href="<%=absolute_url + '/test' %>">7 Last days</a>
+										                    <!-- <a href="<%=absolute_url + '/test' %>">7 Last days</a> -->
+										                      <a id="sevendays" href="javascript:void(null);">Last 7 days</a>
                                         </li>
                                         <li>
-										  <a href="#"><%=absolute_url %>1 Last Month</a>
+										                      <a id="thirtydays" href="javascript:void(null);">Last 30 days</a>
                                         </li>
-										<li>
-										  <a href="#">Last 3 months</a>
+										                    <li>
+										                      <a id="sixmonths" href="javascript:void(null);">Last 6 months</a>
                                         </li>
-                                        <li class="divider"></li>
+										                    <li class="divider"></li>
                                         <li>
-										  <a href="#">Current Year</a>
+										                      <a id="c_year" href="javascript:void(null);">Current Year</a>
+                                        </li>
+										                   <li>
+										                     <a id="l_year" href="javascript:void(null);">Last Year</a>
                                         </li>
                                     </ul>
                                 </div>

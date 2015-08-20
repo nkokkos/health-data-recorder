@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   # Resque Server UI
   mount Resque::Server.new, at: "/resque"
-  
+
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   #http://stackoverflow.com/questions/20599714/rails-add-new-view-to-devise
@@ -27,22 +27,29 @@ Rails.application.routes.draw do
 
   get '/devices',     to: 'devices#index'
   get '/devices/:id', to: 'devices#show', as: 'device'
-  
+
   get '/events', to: 'events#index', as: 'event'
   get '/measurement_updates', to: 'measures#updates', as: 'measurement_update'
-  
+
+
   resources :devices, only: [:index, :show] do
     resources :measures, only: [:index, :show]
   end
 
+  get '/devices/:device_id/measures/:id/sevendays',  to: 'measures#sevendays',  as: 'measures_sevendays'
+  get '/devices/:device_id/measures/:id/thirtydays', to: 'measures#thirtydays', as: 'measures_thirtydays'
+  get '/devices/:device_id/measures/:id/sixmonths',  to: 'measures#sixmonths',  as: 'measures_sixmonths'
+  get '/devices/:device_id/measures/:id/c_year',     to: 'measures#c_year',     as: 'measures_c_year'
+  get '/devices/:device_id/measures/:id/l_year',     to: 'measures#l_year',     as: 'measures_l_year'
+
   get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
-  
+
   resources :patients do
     resources :trigger_blocks do
-	  resources :triggers 
+	  resources :triggers
 	end
   end
-  
+
   #http://stackoverflow.com/questions/8706774/undefined-method-with-path-while-using-rails-form-for
   #since I am not using the resources method:
   #get '/patients/:id/trigger_blocks',     to: 'trigger_blocks#index',   as: 'trigger_blocks'
