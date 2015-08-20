@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20150624225935) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.boolean  "allow_doctor_tracking", limit: 1
+    t.boolean  "allow_doctor_tracking"
     t.integer  "device_id",             limit: 4
     t.integer  "measure_id",            limit: 4
     t.integer  "user_id",               limit: 4
@@ -171,12 +171,12 @@ ActiveRecord::Schema.define(version: 20150624225935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username",               limit: 255
-    t.boolean  "active",                 limit: 1
-    t.boolean  "admin",                  limit: 1
+    t.boolean  "active"
+    t.boolean  "admin"
     t.integer  "sex_id",                 limit: 4
     t.string   "rfid_tag",               limit: 255
-    t.boolean  "is_smoker",              limit: 1
-    t.boolean  "exercises",              limit: 1
+    t.boolean  "is_smoker"
+    t.boolean  "exercises"
     t.integer  "family_status_id",       limit: 4
     t.date     "birth_date"
     t.integer  "height",                 limit: 4,     default: 0
