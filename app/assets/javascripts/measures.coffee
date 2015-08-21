@@ -1,17 +1,17 @@
-#global ganeral coffeescript file for graph generation
+#global general coffeescript file for graph generation
 #default graphing value is 6 months
 $ ->
-  this_graph = Morris.Line
+  this_graph = Morris.Bar
     element: 'device-area-chart'
     data: $('#device-area-chart').data('chartdata')
     xkey: 'created_at'
     ykeys: ['data']
     labels: ['data']
-    pointSize: 4
+    pointSize: 5
     hideHover: 'auto'
     resize: true
-    pointFillColors: ['#ffffff']
-    pointStrokeColors: ['green']
+    #pointFillColors: ['#ffffff']
+    #pointStrokeColors: ['red']
 
   $(".dropdown-menu li a").click ->
     if (this.id) == 'sevendays'

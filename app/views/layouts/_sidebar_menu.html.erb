@@ -1,6 +1,6 @@
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;
-    background-color: #d6e5ed;">
+    background-color: #80c7f1;">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -59,6 +59,12 @@
             device_measure_path(dev.id, measure.id) %>
           </li>
         <% end %>
+        <% if dev.measures.size > 1 %>
+        <li>
+          <%= link_to (content_tag(:i,nil,:class => "fa fa-bar-chart fa-lg") + " All Graphs ").html_safe,
+          device_path(:id => dev.id) %>
+        </li>
+        <% end %>
       <% end %>
 		</ul>
 		<!-- /.nav-second-level -->
@@ -89,7 +95,7 @@
 		  <li>
            <%=link_to (content_tag(:i,nil,:class => "fa fa-ambulance") + " Your Triggers").html_safe,
               event_path %>
-          </li>	  
+          </li>
       <% elsif @user.role.nil? || @user.patient? %>
       <li>
      <%=link_to (content_tag(:i,nil,:class => "fa fa-ambulance") + " Your Triggers").html_safe,

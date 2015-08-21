@@ -1,0 +1,22 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+$ ->
+  Morris.Line
+    element: 'device-area-chart'
+    data: $('#device-area-chart').data('chartdata')
+    xkey: 'created_at'
+    ykeys: ['data']
+    labels: ['data']
+    pointSize: 5
+    hideHover: 'auto'
+    resize: true
+    pointFillColors: ['#ffffff']
+    pointStrokeColors: ['green']
+
+$(document).ready ->
+  $('#device-raw-data').DataTable()
+  "scrollX": false
+  "scrollY": false
+

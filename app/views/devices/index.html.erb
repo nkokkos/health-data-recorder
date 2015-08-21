@@ -43,15 +43,11 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <%= content_tag :div, "", id: "device", :style => "position: relative;height:380px;",
-                            data: {chartdata: Measurement.chart_data(@data)} %>
+                          <%= content_tag :div, "", id: "device2-area-chart", :style => "position: relative;height:380px;",
+                            data: {chartdata: Measurement.chart_data_for_device(@data)} %>
                      <!-- /.panel-body -->
                         </div>
                  </div>
-                 <%=debug(@user) %>
-                 <%=debug(@current_device) %>
-                 <%=debug(@current_device.measures) %>
-                 <%=debug(@data) %>
                </div>
              </div>
       </div>

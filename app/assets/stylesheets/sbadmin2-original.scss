@@ -6,7 +6,6 @@
 
 body {
     background-color: #f8f8f8;
-    //background-color: #dff0fa;
 }
 
 #wrapper {
@@ -26,12 +25,6 @@ body {
         padding: 0 30px;
         border-left: 1px solid #e7e7e7;
     }
-}
-
-
-navbar-default {
-  color: #555;
-  background-color: #D5D5D5;
 }
 
 .navbar-top-links {
@@ -103,8 +96,6 @@ navbar-default {
 
 .sidebar ul li {
     border-bottom: 1px solid #e7e7e7;
-    //border-bottom: 1px solid #80c7f1;
-
 }
 
 .sidebar ul li a.active {
@@ -121,10 +112,6 @@ navbar-default {
 
 .sidebar .active>a>.fa.arrow:before {
     content: "\f107";
-}
-
-.sidebar .nav-second-level .deviceclass {
-    padding-left:  18px;
 }
 
 .sidebar .nav-second-level li,
@@ -364,15 +351,4 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a:hover {
     color: #df8a13;
-}
-
-#footer_page {
-  margin: 10 auto;
-  position: relative;
-  text-align:center;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 20px;
-  background-color: #f5f5f5;
 }

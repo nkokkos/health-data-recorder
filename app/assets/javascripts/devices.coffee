@@ -1,22 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
+#global general coffeescript file for graph generation
+#default graphing value is 6 months
 $ ->
   Morris.Line
-    element: 'device-area-chart'
-    data: $('#device-area-chart').data('chartdata')
+    element: 'device'
+    data: $('#device').data('chartdata')
     xkey: 'created_at'
-    ykeys: ['data']
-    labels: ['data']
+    ykeys:  ['data1', 'data2']
+    labels: ['data1', 'data2']
     pointSize: 5
     hideHover: 'auto'
     resize: true
-    pointFillColors: ['#ffffff']
-    pointStrokeColors: ['green']
-
-$(document).ready ->
-  $('#device-raw-data').DataTable()
-  "scrollX": false
-  "scrollY": false
-
+    #pointFillColors: ['#ffffff']
+    #pointStrokeColors: ['red']
