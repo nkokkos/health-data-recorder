@@ -43,15 +43,36 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <%= content_tag :div, "", id: "device", :style => "position: relative;height:380px;",
-                            data: {chartdata: Measurement.chart_data(@data)} %>
-                     <!-- /.panel-body -->
+                          <%= content_tag :div, "", id: "device", :style => "position: relative; height:390px;",
+                            data: {chartdata: Measurement.chart_data_for_device(@data)} %>
+                          <%#= "Important comment!: " %>
+                          <%#= "javascript for Morris must be included under div or after document ready.
+                          <%#= "Also ids(e.g element) must not contain dashes!!!.Otherwise, morris chart won't show" %>
+                          <%#= "The reason this Morris chart is embedded in view is because we want to change on the fly" %>
+                          <%#= "ykeys and labels coming from the controller" %>
+                          <%= javascript_tag do %>
+                            Morris.Line({
+                              element: 'device',
+                              data: $('#device').data('chartdata'),
+                              xkey:'created_at',
+                              ykeys: <%= raw @measure_names %>,
+                              labels:<%= raw @measure_names %>,
+                              pointSize: 5,
+                              hideHover: 'auto',
+                              resize: true,
+                              lineWidth:2,
+                              xLabelAngle: 60,
+                              axis: true,
+                              grid: true
+                            });
+                        <% end %>
                         </div>
+                     <!-- /.panel-body -->
                  </div>
-                 <%=debug(@user) %>
-                 <%=debug(@current_device) %>
-                 <%=debug(@current_device.measures) %>
-                 <%=debug(@data) %>
+                 <%#=debug(@measure_names) %>
+                 <%#=debug(@measure_names.class) %>
+                 <%#=debug(@current_device.measures) %>
+                 <%#=debug(@data) %>
                </div>
              </div>
       </div>

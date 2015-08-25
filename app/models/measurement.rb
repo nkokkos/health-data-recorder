@@ -44,12 +44,12 @@ class Measurement < ActiveRecord::Base
     end
   end
 
+  #this method grabs devices's measures for graphing.
   def self.chart_data_for_device(collection)
     collection.map do |created_at, measure_value, measure_id|
       {
         created_at:created_at.strftime("%Y-%m-%d %H:%M:%S"),
-        data:measure_value || 0,
-        measure:Measure.find(measure_id).name || null,
+        "#{Measure.find(measure_id).name}":measure_value || 0,
       }
     end
   end
@@ -107,6 +107,7 @@ class Measurement < ActiveRecord::Base
 
   end
 
+ #this method should run every 5 secs through redis 
   def self.build_sql
     users = User.all
 	for user in users
@@ -138,22 +139,20 @@ class Measurement < ActiveRecord::Base
 	      #run sql statement for the latest trigger_block pertaining to the
           #patient
 	      if sql.blank?
-	        # puts "no sql"
 	        # do nothing
-		  else
+		    else
 	        sql_statement << sql << " and measurement_block_id = #{last_measurement_block.id}"
 	        #puts sql_statement
-			out = Measurement.find_by_sql(sql_statement)
+			    out = Measurement.find_by_sql(sql_statement)
 	        #puts (out.size)
 	        if out.any?
 	          event = Event.new
-              event.user_id    = user.id
-			  event.patient_id = patient_id
-			  event.message    = trigger_block.description
-			  event.save
+            event.user_id    = user.id
+			      event.patient_id = patient_id
+			      event.message    = trigger_block.description
+			      event.save
 	        end
 	      end
-
 	  end # trigger_blocks
 	 end # if trigger_blocks.size
 	end # for user in users

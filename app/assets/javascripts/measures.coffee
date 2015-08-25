@@ -1,9 +1,9 @@
 #global general coffeescript file for graph generation
 #default graphing value is 6 months
-$ ->
+$(document).ready ->
   this_graph = Morris.Bar
-    element: 'device-area-chart'
-    data: $('#device-area-chart').data('chartdata')
+    element: 'measure'
+    data: $('#measure').data('chartdataformeasure')
     xkey: 'created_at'
     ykeys: ['data']
     labels: ['data']
@@ -12,7 +12,6 @@ $ ->
     resize: true
     #pointFillColors: ['#ffffff']
     #pointStrokeColors: ['red']
-
   $(".dropdown-menu li a").click ->
     if (this.id) == 'sevendays'
       $.ajax
@@ -43,8 +42,8 @@ $ ->
         cache: false
         type: 'GET'
         success: (response) ->
-          #console.log(response)
-          this_graph.setData(response)
+         #console.log(response)
+         this_graph.setData(response)
     else if (this.id) == 'c_year'
       $.ajax
         url:  window.location.href+'/c_year'
