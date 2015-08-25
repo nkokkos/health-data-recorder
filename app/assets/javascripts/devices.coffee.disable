@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# original Morris Char with coffeescript
 $ ->
   Morris.Line
     element: 'device-area-chart'
@@ -19,4 +20,3 @@ $(document).ready ->
   $('#device-raw-data').DataTable()
   "scrollX": false
   "scrollY": false
-

@@ -2,16 +2,17 @@
 (function() {
   $(document).ready(function() {
     var this_graph;
-    return this_graph = Morris.Bar({
-      element: 'measure-bar-graph',
-      data: $('#measure-bar-graph').data('chartdata_for_measure'),
+    this_graph = Morris.Bar({
+      element: 'measure',
+      data: $('#measure').data('chartdataformeasure'),
       xkey: 'created_at',
       ykeys: ['data'],
       labels: ['data'],
       pointSize: 5,
       hideHover: 'auto',
       resize: true
-    }, $(".dropdown-menu li a").click(function() {
+    });
+    return $(".dropdown-menu li a").click(function() {
       if (this.id === 'sevendays') {
         return $.ajax({
           url: window.location.href + '/sevendays',
@@ -47,8 +48,10 @@
           datatype: 'json',
           cache: false,
           type: 'GET',
-          success: function(response) {}
-        }, this_graph.setData(response));
+          success: function(response) {
+            return this_graph.setData(response);
+          }
+        });
       } else if (this.id === 'c_year') {
         return $.ajax({
           url: window.location.href + '/c_year',
@@ -76,7 +79,7 @@
           }
         });
       }
-    }));
+    });
   });
 
 }).call(this);

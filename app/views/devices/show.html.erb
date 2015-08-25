@@ -51,7 +51,7 @@
                           <%#= "The reason this Morris chart is embedded in view is because we want to change on the fly" %>
                           <%#= "ykeys and labels coming from the controller" %>
                           <%= javascript_tag do %>
-                            Morris.Line({
+                            devicegraph = Morris.Line({
                               element: 'device',
                               data: $('#device').data('chartdata'),
                               xkey:'created_at',
@@ -65,7 +65,76 @@
                               axis: true,
                               grid: true
                             });
-                        <% end %>
+                            $(".dropdown-menu li a").click(function() {
+                              if (this.id === "sevendays") {
+                                return $.ajax({
+                                  url: window.location.href + '/sevendays',
+                                  data: {
+                                    format: 'json'
+                                  },
+                                  datatype: 'json',
+                                  cache: false,
+                                  type: 'GET',
+                                  success: function(response) {
+                                    return devicegraph.setData(response);
+                                  }
+                                });
+                              } else if (this.id === 'thirtydays') {
+                                return $.ajax({
+                                  url: window.location.href + '/thirtydays',
+                                  data: {
+                                    format: 'json'
+                                  },
+                                  datatype: 'json',
+                                  cache: false,
+                                  type: 'GET',
+                                  success: function(response) {
+                                    return devicegraph.setData(response);
+                                  }
+                                });
+                              } else if (this.id === 'sixmonths') {
+                                return $.ajax({
+                                  url: window.location.href + '/sixmonths',
+                                  data: {
+                                    format: 'json'
+                                  },
+                                  datatype: 'json',
+                                  cache: false,
+                                  type: 'GET',
+                                  success: function(response) {
+                                    return devicegraph.setData(response);
+                                  }
+                                });
+                              } else if (this.id === 'c_year') {
+                                return $.ajax({
+                                  url: window.location.href + '/c_year',
+                                  data: {
+                                    format: 'json'
+                                  },
+                                  datatype: 'json',
+                                  cache: false,
+                                  type: 'GET',
+                                  success: function(response) {
+                                    return devicegraph.setData(response);
+                                  }
+                                });
+                              } else if (this.id === 'l_year') {
+                                return $.ajax({
+                                  url: window.location.href + '/l_year',
+                                  data: {
+                                    format: 'json'
+                                  },
+                                  datatype: 'json',
+                                  cache: false,
+                                  type: 'GET',
+                                  success: function(response) {
+                                    return devicegraph.setData(response);
+                                  }
+                                });
+                              };  
+                            });
+                          <% end %>
+
                         </div>
                      <!-- /.panel-body -->
                  </div>

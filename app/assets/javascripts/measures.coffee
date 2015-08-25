@@ -1,4 +1,4 @@
-#global general coffeescript file for graph generation
+#global general coffeescript file for graph generation for measure
 #default graphing value is 6 months
 $(document).ready ->
   this_graph = Morris.Bar

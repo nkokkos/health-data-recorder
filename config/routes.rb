@@ -17,20 +17,18 @@ Rails.application.routes.draw do
   devise_scope :user do
     get  "/users/settings"       => "registrations#settings"
     post "/users/settings_save"  => "registrations#settings_save"
-	post "/users/update_medical_personnel" => "registrations#update_medical_personnel"
-	get  "/users/token"     => "registrations#token"
-	get  "/users/notsignup" => "registrations#nosignup"
+	  post "/users/update_medical_personnel" => "registrations#update_medical_personnel"
+	  get  "/users/token"     => "registrations#token"
+	  get  "/users/notsignup" => "registrations#nosignup"
   end
 
   get 'home/index'
   root :to => 'home#index'
 
-  get '/devices',     to: 'devices#index'
   get '/devices/:id', to: 'devices#show', as: 'device'
 
   get '/events', to: 'events#index', as: 'event'
   get '/measurement_updates', to: 'measures#updates', as: 'measurement_update'
-
 
   resources :devices, only: [:index, :show] do
     resources :measures, only: [:index, :show]
@@ -41,6 +39,12 @@ Rails.application.routes.draw do
   get '/devices/:device_id/measures/:id/sixmonths',  to: 'measures#sixmonths',  as: 'measures_sixmonths'
   get '/devices/:device_id/measures/:id/c_year',     to: 'measures#c_year',     as: 'measures_c_year'
   get '/devices/:device_id/measures/:id/l_year',     to: 'measures#l_year',     as: 'measures_l_year'
+
+  get '/devices/:id/sevendays',  to: 'devices#sevendays',  as: 'devices_sevendays'
+  get '/devices/:id/thirtydays', to: 'devices#thirtydays', as: 'devices_thirtydays'
+  get '/devices/:id/sixmonths',  to: 'devices#sixmonths',  as: 'devices_sixmonths'
+  get '/devices/:id/c_year',     to: 'devices#c_year',     as: 'devices_c_year'
+  get '/devices/:id/l_year',     to: 'devices#l_year',     as: 'devices_l_year'
 
   get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
 
