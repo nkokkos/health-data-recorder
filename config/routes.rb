@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
 
+  #this is how you add new views to device:
   #http://stackoverflow.com/questions/20599714/rails-add-new-view-to-devise
   devise_scope :user do
     get  "/users/settings"       => "registrations#settings"
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   get 'home/index'
   root :to => 'home#index'
 
+  # to do-> this route has to go? (since it's covered by resources :devices)
   get '/devices/:id', to: 'devices#show', as: 'device'
 
   get '/events', to: 'events#index', as: 'event'
@@ -34,24 +36,30 @@ Rails.application.routes.draw do
     resources :measures, only: [:index, :show]
   end
 
+  # routes for javascript update drop down boxes. Look at /views/measures/show
   get '/devices/:device_id/measures/:id/sevendays',  to: 'measures#sevendays',  as: 'measures_sevendays'
   get '/devices/:device_id/measures/:id/thirtydays', to: 'measures#thirtydays', as: 'measures_thirtydays'
   get '/devices/:device_id/measures/:id/sixmonths',  to: 'measures#sixmonths',  as: 'measures_sixmonths'
   get '/devices/:device_id/measures/:id/c_year',     to: 'measures#c_year',     as: 'measures_c_year'
   get '/devices/:device_id/measures/:id/l_year',     to: 'measures#l_year',     as: 'measures_l_year'
 
+  #routes for javascript update drop down boxes. Look at /views/devices/show
   get '/devices/:id/sevendays',  to: 'devices#sevendays',  as: 'devices_sevendays'
   get '/devices/:id/thirtydays', to: 'devices#thirtydays', as: 'devices_thirtydays'
   get '/devices/:id/sixmonths',  to: 'devices#sixmonths',  as: 'devices_sixmonths'
   get '/devices/:id/c_year',     to: 'devices#c_year',     as: 'devices_c_year'
   get '/devices/:id/l_year',     to: 'devices#l_year',     as: 'devices_l_year'
 
+  #SOS: I need to put '/patients/add_remove' get method before show,
+  #otherwise it does not work!!
+  #see this stackoverflow question/answer:
+  #http://stackoverflow.com/questions/25298949/rails-in-controller-a-new-view-is-always-rendered-by-show
   get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
 
   resources :patients do
     resources :trigger_blocks do
-	  resources :triggers
-	end
+	    resources :triggers
+	  end
   end
 
   #http://stackoverflow.com/questions/8706774/undefined-method-with-path-while-using-rails-form-for
@@ -80,16 +88,15 @@ Rails.application.routes.draw do
   # make sure you input the default format json:
   namespace :api do
     get  '/devices', to: 'devices#index',  defaults: { format: 'json' }
-	get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
-	get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
-	get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
+	  get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
+	  get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
+	  get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
     post '/measurement_blocks/create', to: 'measurement_blocks#create',  defaults: { format: 'json' }
   	post '/measurements/create', to: 'measurements#create',  defaults: { format: 'json' }
   end
 
 
   #examples of routing:
-
   #devise_scope :user do
   #  get "users/settings"=> "users/registrations#settings", :as => "sign_up2_registration"
   #end
