@@ -15,7 +15,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive" style="overflow-x: hidden">
-                                <table id="events-raw-data" class="cell-border table table-striped table-bordered table-hover">
+                                <table id="measures-raw-data" class="cell-border table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
 										    <th>Created At:</th>
@@ -30,7 +30,7 @@
 										  <td><%=dataelements.created_at %></td>
                                           <td><%=dataelements.measure_value %></td>
                                           <td><%=Device.find(dataelements.device_id).name %></td>
-										  <td><%=Measure.find(dataelements.measure_id).name %></td>										 
+										  <td><%=Measure.find(dataelements.measure_id).name %></td>
                                         </tr>
                                         <% end %>
                                     </tbody>

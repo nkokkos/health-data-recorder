@@ -2,6 +2,9 @@ require 'resque/server'
 
 Rails.application.routes.draw do
 
+  root :to => 'home#index'
+
+  get 'home/index'
   get 'triggers/show'
   get 'triggers/index'
   get 'triggers/edit'
@@ -23,15 +26,13 @@ Rails.application.routes.draw do
 	  get  "/users/notsignup" => "registrations#nosignup"
   end
 
-  get 'home/index'
-  root :to => 'home#index'
-
   # to do-> this route has to go? (since it's covered by resources :devices)
   get '/devices/:id', to: 'devices#show', as: 'device'
 
   get '/events', to: 'events#index', as: 'event'
   get '/measurement_updates', to: 'measures#updates', as: 'measurement_update'
 
+  #nested routes, it works nicely for devices and measures
   resources :devices, only: [:index, :show] do
     resources :measures, only: [:index, :show]
   end
@@ -69,9 +70,6 @@ Rails.application.routes.draw do
   #post '/patients/:id/trigger_blocks/',   to: 'trigger_blocks#create'
   #delete '/patients/:id/trigger_blocks/:trblock_id', to: 'trigger_blocks#destroy', as: 'destroy_trigger'
 
-  #really need to put '/patients/add_remove' get method before show,
-  #otherwise it does not work
-  #see this stackoverflow question/answer:
   #http://stackoverflow.com/questions/25298949/rails-in-controller-a-new-view-is-always-rendered-by-show
   #get '/patients/add_remove', to: 'patients#add_remove', as: 'patient_add_remove'
   #get '/patients',            to: 'patients#index'
