@@ -18,17 +18,17 @@
                                 <table id="events-raw-data" class="cell-border table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Created At:</th>
                                             <th>Patient Name</th>
                                             <th>Trigger Message</th>
-											<th>Created At:</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% @events.each do |dataelements| %>
                                         <tr>
+                                          <td><%=dataelements.created_at %></td>
                                           <td><%=User.find(dataelements.patient_id).name %></td>
                                           <td><%=dataelements.message %></td>
-										                      <td><%=dataelements.created_at %></td>
                                         </tr>
                                         <% end %>
                                     </tbody>

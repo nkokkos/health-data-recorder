@@ -4,7 +4,7 @@ class MeasuresController < ApplicationController
   #-> http://hostname/measurement_updates
   def updates
     @user = User.find(current_user.id)
-    @measurements = @user.measurements.all.order(:created_at => "asc")
+    @measurements = @user.measurements.all.order(:created_at => "desc")
   end
 
   #default data range is "last 6 months"

@@ -1,12 +1,10 @@
 #global general coffeescript file for graph generation for measure
 #default graphing value is 6 months
-$(document).ready ->
-  $('#measures-raw-data').dataTable()
-  sPaginationType: "full_numbers"
-  bJQueryUI: true
-  bProcessing: true
-  bServerSide: true
-  sAjaxSource: $('#measures').data('source')
+jQuery ->
+  $('#measures-raw-data').dataTable
+    sPaginationType: "full_numbers"
+    asSorting: [['0','desc']]
+    aaSorting: [['0','desc']]
 
 $(document).ready ->
   this_graph = Morris.Bar
