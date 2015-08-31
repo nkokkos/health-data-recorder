@@ -22,10 +22,10 @@
                                     <ul class="dropdown-menu pull-right" role="menu">
                                         <li >
 										                    <!-- <a href="<%=absolute_url + '/test' %>">7 Last days</a> -->
-										                      <a id="sevendays" href="javascript:void(null);">Last 7 days</a>
+										 <a id="sevendays" href="javascript:void(null);">Last 7 days</a>
                                         </li>
                                         <li>
-										                      <a id="thirtydays" href="javascript:void(null);">Last 30 days</a>
+										  <a id="thirtydays" href="javascript:void(null);">Last 30 days</a>
                                         </li>
 										                    <li>
 										                      <a id="sixmonths" href="javascript:void(null);">Last 6 months</a>
@@ -43,98 +43,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <%= content_tag :div, "", id: "device", :style => "position: relative; height:390px;",
-                            data: {chartdata: Measurement.chart_data_for_device(@data)} %>
-                          <%#= "Important comment!: " %>
-                          <%#= "javascript for Morris must be included under div or after document ready.
-                          <%#= "Also ids(e.g element) must not contain dashes!!!.Otherwise, morris chart won't show" %>
-                          <%#= "The reason this Morris chart is embedded in view is because we want to change on the fly" %>
-                          <%#= "ykeys and labels coming from the controller" %>
-                          <%= javascript_tag do %>
-                            devicegraph = Morris.Line({
-                              element: 'device',
-                              data: $('#device').data('chartdata'),
-                              xkey:'created_at',
-                              ykeys: <%= raw @measure_names %>,
-                              labels:<%= raw @measure_names %>,
-                              pointSize: 5,
-                              hideHover: 'auto',
-                              resize: true,
-                              lineWidth:2,
-                              xLabelAngle: 60,
-                              axis: true,
-                              grid: true
-                            });
-                            $(".dropdown-menu li a").click(function() {
-                              if (this.id === "sevendays") {
-                                return $.ajax({
-                                  url: window.location.href + '/sevendays',
-                                  data: {
-                                    format: 'json'
-                                  },
-                                  datatype: 'json',
-                                  cache: false,
-                                  type: 'GET',
-                                  success: function(response) {
-                                    return devicegraph.setData(response);
-                                  }
-                                });
-                              } else if (this.id === 'thirtydays') {
-                                return $.ajax({
-                                  url: window.location.href + '/thirtydays',
-                                  data: {
-                                    format: 'json'
-                                  },
-                                  datatype: 'json',
-                                  cache: false,
-                                  type: 'GET',
-                                  success: function(response) {
-                                    return devicegraph.setData(response);
-                                  }
-                                });
-                              } else if (this.id === 'sixmonths') {
-                                return $.ajax({
-                                  url: window.location.href + '/sixmonths',
-                                  data: {
-                                    format: 'json'
-                                  },
-                                  datatype: 'json',
-                                  cache: false,
-                                  type: 'GET',
-                                  success: function(response) {
-                                    return devicegraph.setData(response);
-                                  }
-                                });
-                              } else if (this.id === 'c_year') {
-                                return $.ajax({
-                                  url: window.location.href + '/c_year',
-                                  data: {
-                                    format: 'json'
-                                  },
-                                  datatype: 'json',
-                                  cache: false,
-                                  type: 'GET',
-                                  success: function(response) {
-                                    return devicegraph.setData(response);
-                                  }
-                                });
-                              } else if (this.id === 'l_year') {
-                                return $.ajax({
-                                  url: window.location.href + '/l_year',
-                                  data: {
-                                    format: 'json'
-                                  },
-                                  datatype: 'json',
-                                  cache: false,
-                                  type: 'GET',
-                                  success: function(response) {
-                                    return devicegraph.setData(response);
-                                  }
-                                });
-                              };
-                            });
-                          <% end %>
-
+                          <%= render :partial => "devices/morris_updates.js.erb" %>
                         </div>
                      <!-- /.panel-body -->
                  </div>
