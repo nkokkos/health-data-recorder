@@ -120,6 +120,8 @@ class RegistrationsController < Devise::RegistrationsController
             :exercises,
 			:is_smoker,
 			:smoking_frequency_id,
+			:family_status_id,
+			:employment_status_id,
 			:access_id,
 			{:medical_personnel_ids => []},
 			{:chronic_disease_ids => []})

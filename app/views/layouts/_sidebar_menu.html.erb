@@ -1,6 +1,6 @@
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;
-    background-color: #80c7f1;">
+    background-color: #;">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -98,9 +98,9 @@
           </li>
       <% elsif @user.role.nil? || @user.patient? %>
       <li>
-     <%=link_to (content_tag(:i,nil,:class => "fa fa-ambulance") + " Your Triggers").html_safe,
-              event_path %>
-      </li>
+       <%=link_to (content_tag(:i,nil,:class => "fa fa-database") + " Your Measurements").html_safe,
+              measurement_update_path %>
+     </li>
       <% end %>
 		</ul>
 		<!-- /.nav-second-level -->

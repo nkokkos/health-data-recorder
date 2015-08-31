@@ -120,7 +120,7 @@ group :development, :test do
   
   gem 'derailed'
   gem 'stackprof'
-  
+  gem 'rails-erd' 
 end
 
 

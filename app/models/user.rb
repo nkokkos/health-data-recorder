@@ -191,7 +191,8 @@ class User < ActiveRecord::Base
   #random key already exists
   def private_generate_token
     begin
-      self.access_id = SecureRandom.base64(40)
+       #self.access_id = SecureRandom.base64(40)
+	   self.access_id = SecureRandom.hex(40)
     end while self.class.exists?(access_id: access_id)
   end
 

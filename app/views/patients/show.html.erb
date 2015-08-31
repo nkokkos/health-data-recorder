@@ -32,9 +32,26 @@
                                <!-- Tab panes -->
                                <div class="tab-content">
                                    <div class="tab-pane fade in active" id="home">
-                                       <h4>Patient Profile:</h4>
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                   </div>
+                                       <p></p>								   
+									   <p><b>Username:</b><%=@user.username %></p>
+									   <p><b>Birth Date:</b><%= @user.birth_date %></p>
+									   <p><b>Height (cm):</b><%= @user.height %></p>
+									   <p><b>Smokes?:</b><%=@user.is_smoker %></p>
+									   <p><b>Smoking Freq:</b><%=@user.exercises %></p>
+									   <p><b>Family Status:</b><%=@user.family_status_id %></p>
+                                       <p><b>Education Level:</b><%=@user.education_level_id %></p>	
+									   <p><b>Employment Status:</b><%=@user.employment_status_id %></p>
+									   <p><b>Chronic Diseases:</b> 
+								         <% for chronic_disease in ChronicDisease.all.order('description ASC') %>  
+								         <% if @user.chronic_diseases.include?(chronic_disease) %>
+									       <%= chronic_disease.description + " - "  %>
+										 <% end %>
+										 <% end %>
+									   </p>
+									   <p><b>Additional Info:</b><%=@user.additional_info %></p>
+                                       <p><b>Role:</b><%=@user.role %></p>											   
+									   
+								   </div>
                                    <div class="tab-pane fade" id="profile">
                                        <h4>Latest Measurements:</h4>
                                        <div class="table-responsive">
@@ -73,7 +90,7 @@
                                    </div>
                                    <div class="tab-pane fade" id="messages">
                                      <div class="row">
-                                         <div class="col-lg-12">
+                                         <div class="col-lg-12" align="center">
                                              <h3 class="page-header">Age/ΒΜΙ/%Body Fat Calculation:</h3>
                                          </div>
                                          <!-- /.col-lg-12 -->
@@ -81,7 +98,7 @@
                                      <div class="row">
                                          <div class="col-lg-12">
                                            <div class="panel panel-default">
-                                                 <div class="panel-heading">
+                                                 <div class="panel-heading" align="center">
                                                      Calculation using Device: <%=@device_name %>
                                                  </div>
                                                  <div class="panel-body">
@@ -91,35 +108,35 @@
 
                                           <!-- /.col-lg-4 -->
                                           <div class="col-lg-4">
-                                              <div class="well well-sm">
-                                                  <h4>Your current age(years):</h4>
+                                              <div class="well well-sm" align="center">
+                                                  <h4>Current age(years):</h4>
                                                   <p><h3><%=number_with_precision(@current_age,precision: 2)%></h3></p>
                                               </div>
                                           </div>
                                           <% if !@sex.nil? %>
                                             <div class="col-lg-4">
-                                              <div class="well well-sm">
-                                                  <h4>Your current BMI:</h4>
+                                              <div class="well well-sm" align="center">
+                                                  <h4>Current BMI:</h4>
                                                   <p><h3><%=number_with_precision(@bmi, precision: 2)%></h3></p>
                                               </div>
 
                                             </div>
                                             <div class="col-lg-4">
-                                              <div class="well well-sm">
-                                                  <h4>Your current Body Fat %:</h4>
+                                              <div class="well well-sm" align="center">
+                                                  <h4>Current Body Fat %:</h4>
                                                   <p><h3><%=number_with_precision(@body_fat, precision: 2)%></h3></p>
                                               </div>
                                             </div>
                                             <%elsif @sex.nil? %>
                                               <div class="col-lg-4">
-                                                <div class="well well-sm">
-                                                  <h4>Your current BMI:</h4>
+                                                <div class="well well-sm" align="center">
+                                                  <h4>Current BMI:</h4>
                                                   <p><h3><%=@error_message %></h3></p>
                                                 </div>
                                               </div>
                                               <div class="col-lg-4">
-                                                <div class="well well-sm">
-                                                  <h4>Your current Body Fat %:</h4>
+                                                <div class="well well-sm" align="center">
+                                                  <h4>Current Body Fat %:</h4>
                                                   <p><h3><%=@error_message%></h3></p>
                                                 </div>
                                               </div>
@@ -143,43 +160,4 @@
 </div>
 </div>
 </div>
-     <div class="row">
-                 <div class="col-lg-12">
-              <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Raw Data:
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive" style="overflow-x: hidden">
-                                <table id="patients-raw-data" class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Measure Value</th>
-                                            <th>Device</th>
-											<th>Measure Type</th>
-											<th>Created at</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% @user_measurements.each do |dataelements| %>
-                                        <tr>
-                                          <td><%=dataelements.measure_value %></td>
-                                          <td><%=Device.find(dataelements.device_id).name %></td>
-										  <td><%=Measure.find(dataelements.measure_id).name %></td>
-                                          <td><%=dataelements.created_at %>
-                                        </tr>
-                                        <% end %>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-            </div>
-            <!-- /.row -->
-        </div>
-
 </div>

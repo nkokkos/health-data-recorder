@@ -10,20 +10,21 @@ Rails.application.routes.draw do
   get 'triggers/edit'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
-  # Resque Server UI
-  mount Resque::Server.new, at: "/resque"
-
+  
   devise_for :users, :controllers => { :registrations => "registrations" }
-
+  # Resque Server UI
+  authenticate :user do #replace admin_user(s) with whatever model your users are stored in.
+    mount Resque::Server.new, at: "/resque"
+  end
+    
   #this is how you add new views to device:
   #http://stackoverflow.com/questions/20599714/rails-add-new-view-to-devise
   devise_scope :user do
     get  "/users/settings"       => "registrations#settings"
     post "/users/settings_save"  => "registrations#settings_save"
-	  post "/users/update_medical_personnel" => "registrations#update_medical_personnel"
-	  get  "/users/token"     => "registrations#token"
-	  get  "/users/notsignup" => "registrations#nosignup"
+	post "/users/update_medical_personnel" => "registrations#update_medical_personnel"
+	get  "/users/token"     => "registrations#token"
+	get  "/users/notsignup" => "registrations#nosignup"
   end
 
   # to do-> this route has to go? (since it's covered by resources :devices)
