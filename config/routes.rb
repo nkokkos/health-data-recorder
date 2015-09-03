@@ -12,19 +12,29 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   devise_for :users, :controllers => { :registrations => "registrations" }
-  # Resque Server UI
-  authenticate :user do #replace admin_user(s) with whatever model your users are stored in.
-    mount Resque::Server.new, at: "/resque"
+
+  authenticate :user do 
+    #this will mount the Resque Server UI unless the user is not admin. 
+	#if a user that is not admin tries to access /resque, then he/she will be
+	#presented with a "no route matches /resque error"
+	#Constraint::Admin.new is defined in /lib/constraint/admin.rb
+	mount Resque::Server.new, at: "/resque", constraints: Constraint::Admin.new
   end
-    
+  # Read below to learn how to authenticate user with a certain attribute; eg. admin
+  #http://blog.yanted.com/2014/08/27/rails-constraints-custom-routes/
+  #http://spin.atomicobject.com/2012/03/19/dynamic-rails-routes-with-warden-devise-and-constraints/
+  #https://www.codementor.io/tips/8132473431/use-custom-routing-constraints-to-limit-access-to-rails-routes-via-warden
+  
+  # to do: implement the above
+ 
   #this is how you add new views to device:
   #http://stackoverflow.com/questions/20599714/rails-add-new-view-to-devise
   devise_scope :user do
     get  "/users/settings"       => "registrations#settings"
     post "/users/settings_save"  => "registrations#settings_save"
 	post "/users/update_medical_personnel" => "registrations#update_medical_personnel"
-	get  "/users/token"     => "registrations#token"
-	get  "/users/notsignup" => "registrations#nosignup"
+	get  "/users/token"          => "registrations#token"
+	get  "/users/notsignup"      => "registrations#nosignup"
   end
 
   # to do-> this route has to go? (since it's covered by resources :devices)
@@ -87,13 +97,12 @@ Rails.application.routes.draw do
   # make sure you input the default format json:
   namespace :api do
     get  '/devices', to: 'devices#index',  defaults: { format: 'json' }
-	  get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
-	  get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
-	  get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
+    get  '/measurement_blocks', to: 'measurement_blocks#index',  defaults: { format: 'json' }
+    get  '/measures', to: 'measures#index',  defaults: { format: 'json' }
+    get  '/measurements', to: 'measurements#index', defaults: { format: 'json' }
     post '/measurement_blocks/create', to: 'measurement_blocks#create',  defaults: { format: 'json' }
-  	post '/measurements/create', to: 'measurements#create',  defaults: { format: 'json' }
+    post '/measurements/create', to: 'measurements#create',  defaults: { format: 'json' }
   end
-
 
   #examples of routing:
   #devise_scope :user do
