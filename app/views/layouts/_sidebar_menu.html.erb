@@ -94,7 +94,7 @@
 		  </li>
 		  <li>
            <%=link_to (content_tag(:i,nil,:class => "fa fa-ambulance") + " Your Triggers").html_safe,
-              event_path %>
+              events_path %>
           </li>
       <% elsif @user.role.nil? || @user.patient? %>
       <li>

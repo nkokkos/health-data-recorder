@@ -40,7 +40,9 @@ Rails.application.routes.draw do
   # to do-> this route has to go? (since it's covered by resources :devices)
   get '/devices/:id', to: 'devices#show', as: 'device'
 
-  get '/events', to: 'events#index', as: 'event'
+  #get '/events', to: 'events#index', as: 'event'
+  resources :events
+  
   get '/measurement_updates', to: 'measures#updates', as: 'measurement_update'
 
   #nested routes, it works nicely for devices and measures

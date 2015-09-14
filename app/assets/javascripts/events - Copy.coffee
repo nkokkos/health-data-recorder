@@ -13,7 +13,3 @@ jQuery ->
     asSorting: [['0','desc']]
     aaSorting: [['0','desc']]
     sPaginationType: "full_numbers"
-    bJQueryUI: true
-    bProcessing: true
-    bServerSide: true
-    sAjaxSource: $('#events-raw-data').data('source')
