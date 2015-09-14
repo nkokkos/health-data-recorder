@@ -44,7 +44,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                           <%= render :partial => "devices/morris_updates.js.erb" %>
-                        </div>
+                        </div>			
                      <!-- /.panel-body -->
                  </div>
                  <%#=debug(@measure_names) %>
@@ -52,6 +52,17 @@
                  <%#=debug(@current_device.measures) %>
                  <%#=debug(@data) %>
                </div>
+			   	<% if format_device(@current_device.name).to_s.eql? "AnDMedical" %>
+				<div class="alert alert-info fade in">
+                  <a href="javascript:void(null)" class="close" data-dismiss="alert">&times;</a>
+                 <strong>Note!</strong> The chart below will appear as long as the device name is "AnDMedical".
+			    </div>				
+			      <div class="panel-body">
+				    <div class="col-lg-12"  align="center">
+                      <%= image_tag("blood_pressure_Table") %>
+                    </div>
+					</div>
+			    <% end %>
              </div>
       </div>
         <!-- /#page-wrapper -->

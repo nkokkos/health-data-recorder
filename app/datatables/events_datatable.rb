@@ -46,11 +46,12 @@ class EventsDatatable
 	    event << record.created_at
         event << User.find(record.patient_id).name
         event << record.message
-		#link_to "Delete", event_path(:id => record.id), method: :delete, class: "btn btn-danger btn-sm"
+		event << link_to("Delete", event_path(:id => record.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?'}, class: "btn btn-danger btn-sm")
 		#link_to content_tag(:i, "", class: "icon-trash icon-white"), event_path(:id => record.id), method: :delete, class: "btn btn-danger btn-sm"
-        #event << link_to("Delete", event_path(record.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "label alert round" ) 
         #event << link_to ("TEXT" + content_tag(:i, class: "icon-trash icon-white")).html_safe, event_path(:id => record.id), method: :delete, class: "btn btn-danger btn-sm"
-		event << link_to(fa_icon('fa-trash-o fa-lg'), event_path(record.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, class: 'btn btn-danger') 
+		#event << link_to(fa_icon('fa-trash-o fa-lg'), event_path(record.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, class: 'btn btn-danger') 
+        #event << link_to  "Delete This", event_path(record.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, class: 'btn btn-danger') 
+        #event << link_to(fa_icon('fa fa-times'), event_path(record.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, class: 'btn btn-danger') 
         events_data << event
 	end
 	events_data
@@ -64,8 +65,7 @@ class EventsDatatable
 <% end %>
 =end
 
-  
-  
+ 
   def events   
     @events = Event.all.where("user_id=?", current_user.id)
   end

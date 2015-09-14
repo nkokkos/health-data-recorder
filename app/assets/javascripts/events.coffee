@@ -16,4 +16,7 @@ jQuery ->
     bJQueryUI: true
     bProcessing: true
     bServerSide: true
+    bInfo: true
+    bAutoWidth: true
+    responsive: true
     sAjaxSource: $('#events-raw-data').data('source')

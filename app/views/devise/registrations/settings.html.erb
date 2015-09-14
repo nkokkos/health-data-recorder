@@ -122,13 +122,29 @@
                                         <%= f.button :submit, "Update", class: "btn btn-success"%>
                                         <%= link_to  "Cancel", root_path, class: "btn btn-default" %>
                                      </div>
-                                     <% end %>  
+                                     <% end %>
+									 <h4>You are currently being tracked by: <%= @user.user_passive_patients.count %> medical personnel</h4>
+									 <% if @user.user_passive_patients.count > 0 %>
+									 <table class="table">
+										<thead>
+										  <tr>
+											<th>UserName</th>
+											<th>Email</th>
+										  </tr>
+										</thead>
+										<tbody>
+										 <% for user in @user.user_passive_patients %>
+										  <tr>
+											<td><%= user.username %></td>
+											<td><%= user.email %> </td>
+										  </tr>
+										 <% end %>
+										</tbody>
+									  </table>
+									 <% end %>
                                 </div>
 								
                             </div>
-							
-							
-														
                         </div>
                         <!-- /.panel-body -->
                     </div>

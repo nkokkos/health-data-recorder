@@ -87,7 +87,7 @@
 		<li>
 	   <a href="#"><i class="fa fa-info"></i> Events<span class="fa arrow"></span></a>
 		<ul class="nav nav-second-level">
-      <% if @user.both_roles? || @user.doctor_or_nurse? %>
+      <% if current_user.both_roles? || current_user.doctor_or_nurse? %>
       <li>
 		  <%=link_to (content_tag(:i,nil,:class => "fa fa-database") + " Your Measurements").html_safe,
               measurement_update_path %>
@@ -96,7 +96,7 @@
            <%=link_to (content_tag(:i,nil,:class => "fa fa-ambulance") + " Your Triggers").html_safe,
               events_path %>
           </li>
-      <% elsif @user.role.nil? || @user.patient? %>
+      <% elsif current_user.role.nil? || current_user.patient? %>
       <li>
        <%=link_to (content_tag(:i,nil,:class => "fa fa-database") + " Your Measurements").html_safe,
               measurement_update_path %>

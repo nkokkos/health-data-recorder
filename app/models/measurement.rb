@@ -60,12 +60,16 @@ class Measurement < ActiveRecord::Base
     weight / (height_in_meters * height_in_meters)
   end
  
- #calcuate body fat from bmi
+ #Calcuate body fat from bmi based on:
+ #British Journal on  Nutrition (1991), 65, 105-114, 105 
+ #Body mass index as a measure of body fatness: age- 
+ #and sex-specific prediction formulas 
+ # http://www.ncbi.nlm.nih.gov/pubmed/2043597
   def self.body_fat_through_bmi(bmi,age,sex)
     case sex
-    when 1
+    when 1 # 1 for male
       ( 1.20 * bmi ) + ( 0.23 * age ) - ( 10.8 * 1) - 5.4
-    when 2
+    when 2 # 2 for female 
       ( 1.20 * bmi ) + ( 0.23 * age ) - ( 10.8 * 0) - 5.4
     end
   end

@@ -87,10 +87,15 @@
                         <p><h3><%=number_with_precision(@bmi, precision: 2)%></h3></p>
                     </div>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-4">				
                     <div class="well well-sm" align="center">
                         <h3>Your current Body Fat %:</h4>
                         <p><h3><%=number_with_precision(@body_fat, precision: 2)%></h3></p>
+						<div class="alert alert-info fade in">
+                          <a href="javascript:void(null)" class="close" data-dismiss="alert">&times;</a>
+                          <strong>Body Fat Calculation based on British Journal of Nutrition (1991), 65, 105-114 105: "Body mass index as a measure of body fatness: 
+						  age and sex  specific prediction formulas BY PAUL DEURENBERG, JAN A. WESTSTRATE* AND JAAP C. SEIDELL"</strong>
+			            </div>
                     </div>
                   </div>
                   <%elsif @sex.nil? %>
