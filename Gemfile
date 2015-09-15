@@ -7,7 +7,8 @@ gem 'rails' # use latest rails version
 
 #gem 'pg'
 #use mysql2 insteaf of postgres:
-gem 'mysql2'
+#gem 'mysql2' 
+gem 'mysql2', '~> 0.3.18' # downgrade from rails4
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.1'
