@@ -28,28 +28,41 @@
                                    </li>
                                   
                                </ul>
-
+								<%# if_this_is_a_true_value ? then_the_result_is_this : else_it_is_this %>
                                <!-- Tab panes -->
                                <div class="tab-content">
                                    <div class="tab-pane fade in active" id="home">
                                        <p></p>								   
-									   <p><b>Username:</b><%=@user.username %></p>
-									   <p><b>Birth Date:</b><%= @user.birth_date %></p>
-									   <p><b>Height (cm):</b><%= @user.height %></p>
-									   <p><b>Smokes?:</b><%=@user.is_smoker %></p>
-									   <p><b>Smoking Freq:</b><%=@user.exercises %></p>
-									   <p><b>Family Status:</b><%=@user.family_status_id %></p>
-                                       <p><b>Education Level:</b><%=@user.education_level_id %></p>	
-									   <p><b>Employment Status:</b><%=@user.employment_status_id %></p>
-									   <p><b>Chronic Diseases:</b> 
+									   <p><b>Username: &nbsp; </b><%=@user.username %></p>
+									   <p><b>Birth Date: &nbsp; </b><%= @user.birth_date %></p>
+									   <p><b>Height (cm): &nbsp; </b><%= @user.height %></p>
+									   <p><b>Smokes?: &nbsp; </b><%=@user.is_smoker %></p>
+									   <p><b>Smoking Frequency?: &nbsp; </b><%= SmokingFrequency.find(@user.smoking_frequency_id).description %></p>
+									   <p><b>Exercises?: &nbsp; </b><%=@user.exercises %></p>
+									   <p><b>Family Status: &nbsp; </b>
+									     <% if !@user.family_status_id.nil? %>
+										   <%= FamilyStatus.find(@user.family_status_id).status %>
+										 <% end %>
+										</p>
+                                       <p><b>Education Level: &nbsp; </b>
+									     <% if !@user.education_level_id.nil? %> 
+										   <%= EducationLevel.find(@user.education_level_id).description %>
+										 <% end %>
+									   </p>	
+									   <p><b>Employment Status: &nbsp;</b>
+									   <% if !@user.employment_status_id.nil? %>
+									     <%= EmploymentStatus.find(@user.employment_status_id).status %>
+									   <% end %>	 
+										</p>
+									   <p><b>Chronic Diseases: &nbsp;</b> 
 								         <% for chronic_disease in ChronicDisease.all.order('description ASC') %>  
 								         <% if @user.chronic_diseases.include?(chronic_disease) %>
 									       <%= chronic_disease.description + " - "  %>
 										 <% end %>
 										 <% end %>
 									   </p>
-									   <p><b>Additional Info:</b><%=@user.additional_info %></p>
-                                       <p><b>Role:</b><%=@user.role %></p>											   
+									   <p><b>Additional Info: &nbsp;</b><%=@user.additional_info %></p>
+                                       <p><b>Role: &nbsp;</b><%=@user.role %></p>											   
 									   
 								   </div>
                                    <div class="tab-pane fade" id="profile">

@@ -1,8 +1,13 @@
 class Api::BaseController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  protect_from_forgery with: :null_session
+  
+  #CSRF token protection and disabling of cookies: 
+  #https://labs.kollegorna.se/blog/2015/04/build-an-api-now/
+  #http://stackoverflow.com/questions/16258911/rails-4-authenticity-token
+  protect_from_forgery with: :null_session 
   before_action :destroy_session
+  
   before_filter :authenticate_user_with_access_key!
   respond_to    :json
 
