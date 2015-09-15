@@ -1,5 +1,6 @@
 class EventsDatatable 
-  delegate :params, :i, :content_tag, :fa_icon, :link_to, :event_path, :current_user, to: :@view 
+
+  delegate :params, :i, :content_tag, :fa_icon, :link_to, :event_path,:patient_path, :current_user, to: :@view 
 
   def initialize(view) 
     @view = view 
@@ -10,33 +11,7 @@ class EventsDatatable
       data: data
     } 
   end 
- 
-=begin
-  def data 
-    events = [] 
-    display_on_page.map do |record| 
-      product = [] 
-      product << record.id 
-      product << record.code 
-      product << record.name 
-      product << record.description 
-      product << link_to(fa_icon('trash-o lg'), products_path(record), method: :delete, data: { confirm: 'Are you sure?' }, class: 'label alert round') 
-      products << product 
-    end 
-    products 
-  end 
-
-    create_table "events", force: :cascade do |t|
-    t.integer  "user_id",          limit: 4
-    t.integer  "patient_id",       limit: 4
-    t.text     "message",          limit: 65535
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "trigger_block_id", limit: 4
-  end
-=end
-  
- 
+   
   private
 
   def data
@@ -44,7 +19,7 @@ class EventsDatatable
     events.map do |record|
 	    event = []
 	    event << record.created_at
-        event << User.find(record.patient_id).name
+        event << link_to(User.find(record.patient_id).name, patient_path(:id => record.patient_id))
         event << record.message
 		event << link_to("Delete", event_path(:id => record.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?'}, class: "btn btn-danger btn-sm")
 		#link_to content_tag(:i, "", class: "icon-trash icon-white"), event_path(:id => record.id), method: :delete, class: "btn btn-danger btn-sm"
@@ -65,7 +40,6 @@ class EventsDatatable
 <% end %>
 =end
 
- 
   def events   
     @events = Event.all.where("user_id=?", current_user.id)
   end
@@ -80,12 +54,31 @@ class EventsDatatable
   #end
   end
   
-
+=begin
+  def data 
+    events = [] 
+    display_on_page.map do |record| 
+      product = [] 
+      product << record.id 
+      product << record.code 
+      product << record.name 
+      product << record.description 
+      product << link_to(fa_icon('trash-o lg'), products_path(record), method: :delete, data: { confirm: 'Are you sure?' }, class: 'label alert round') 
+      products << product 
+    end 
+    products 
+  end 
+  
+    create_table "events", force: :cascade do |t|
+    t.integer  "user_id",          limit: 4
+    t.integer  "patient_id",       limit: 4
+    t.text     "message",          limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "trigger_block_id", limit: 4
+  end
+=end
+   
 end
-  
 
-  
-  
-  
-  
   

@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
   has_many :events # a user's event table is filled with data from 
                    # the triggers block table. Remember that a trigger 
 				   # block has a description. A trigger block is evaluated
-				   # to true when all the triggers
+				   # to true when all the triggers asre true
 
   validates :height, :allow_nil => false, numericality: { only_integer: true }
 
