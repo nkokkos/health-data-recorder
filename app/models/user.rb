@@ -133,6 +133,7 @@ class User < ActiveRecord::Base
 	  field :email
 	  field :password
 	  field :password_confirmation
+	  field :admin
 	  field :sex_id
 	  field :role do
 	    searchable false

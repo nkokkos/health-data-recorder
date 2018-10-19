@@ -12,6 +12,7 @@
 #
 
 class Measurement < ActiveRecord::Base
+  
 
   belongs_to :measurement_block
 
@@ -20,14 +21,14 @@ class Measurement < ActiveRecord::Base
   #scope :test, -> { where('measurements.created_at < ?', 1.week.ago) }
 
   scope :last_7_days,   -> { where("measurements.created_at <= ? and measurements.created_at >= ?",
-						     Date.today, Date.today - 7)  }
+						     Date.today.at_end_of_day, Date.today.at_end_of_day - 7.days)  }
   scope :last_30_days,  -> { where("measurements.created_at <= ? and measurements.created_at >= ?",
-							 Date.today, Date.today - 30) }
+							 Date.today.at_end_of_day, Date.today.at_end_of_day - 30.days) }
   scope :last_6_months, -> { where("measurements.created_at <= ? and measurements.created_at >= ?",
-							 Date.today, Date.today - 6.months) }
+							 Date.today.at_end_of_day, Date.today.at_end_of_day - 6.months) }
   #extract should work for postgres too, for now, this works for mysql
   scope  :current_year,  -> { where('extract(year from measurements.created_at)=?', Time.current.year) }
-  scope  :last_year,     -> { where('extract(year from measurements.created_at)=?', Time.current.year - 1) }
+  scope  :last_year,     -> { where('extract(year from measurements.created_at)=?', Time.current.year - 1.year) }
 
 
   #after_commit :create_event, on: :create
@@ -135,7 +136,14 @@ class Measurement < ActiveRecord::Base
   
   #Rails_admin configurations:
   # measure_id_enum and device_id_enum are methods used by rails_admin
-  # to populate the select boxes:
+  # to populate the select boxes and created_at to display creation value:
+  
+  rails_admin do
+    configure :created_at do
+      visible true # so it's on new/edit/show 
+    end
+  end
+  
   def measure_id_enum
     Measure.all.map { |u| ["#{u.name}", u.id] }
   end
@@ -143,7 +151,7 @@ class Measurement < ActiveRecord::Base
   def device_id_enum
     Device.all.map { |u| ["#{u.name}", u.id] }
   end
-
+  
 #demo functions, left here for future reference  
 =begin  
   def self.build_sql(user_id)
