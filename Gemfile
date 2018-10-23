@@ -68,9 +68,11 @@ gem 'font-awesome-rails'
 gem 'better_errors'
 
 # administration
-gem 'rails_admin'
+
+gem "rails_admin", ">= 1.3.0"
+
 # administration theme:
-gem 'rails_admin_flatly_theme', path: 'gems/rails_admin_flatly_theme'
+#gem 'rails_admin_flatly_theme', path: 'gems/rails_admin_flatly_theme'
 
 #graphing tools
 gem 'morrisjs-rails'
