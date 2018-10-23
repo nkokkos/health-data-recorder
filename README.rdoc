@@ -1,6 +1,6 @@
 == README
 
-Web Application for the Eltab Project. It collects data measuremets from
+Web Application for a Personal Health Data Logger. It collects data measuremets from
 patients through a rest api interface. 
 
 The application shows the data collected in graphs. It provides a minimum of data 
