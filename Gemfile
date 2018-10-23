@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-#gem 'rails', '4.2.3'
 
-gem 'rails' # use latest rails version
+gem 'rails', '4.2.10'
+
 
 #gem 'pg'
 #use mysql2 insteaf of postgres:
