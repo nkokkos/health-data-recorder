@@ -60,7 +60,10 @@ gem 'devise'
 gem 'simple_form'
 
 #layouts
-gem 'bootstrap-sass'
+
+
+gem "bootstrap-sass", ">= 3.4.1"
+#gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
 
